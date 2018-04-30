@@ -1,17 +1,23 @@
 import Vue from "vue"
+import Vuetify from"vuetify";
 import VueRouter from "vue-router";
-import VueResourse from 'vue-resource';
+import axios from "axios";
+
+import 'vuetify/dist/vuetify.min.css'
 
 import App from "./App.vue";
 import { routes } from "./routes";
 // import store from "./store/store";
 
 Vue.use(VueRouter);
-Vue.use(VueResourse);
+
+Vue.use(Vuetify);
 
 // Vue.http.options.root = 'https://vuejs-stock-trader-c7441.firebaseio.com/';
+// Vue.http.options.root = 'http://localhost:3005/v1/';
 
-Vue.http.options.root = 'http://localhost:3005/v1/';
+axios.defaults.baseURL = 'http://localhost:3005/v1';
+
 
 Vue.filter('currency', (value) => {
   return '$' + value.toLocaleString();

@@ -2,8 +2,11 @@
   <div>
     <app-header></app-header>
     <!--<list-menu></list-menu>-->
-<!--<card-tile></card-tile>-->
-<router-view></router-view>
+    <!--<card-tile></card-tile>-->
+    <transition mode="out-in" name="slide-fade">
+
+      <router-view class="top-pad"> </router-view>
+    </transition>
   </div>
 </template>
 
@@ -27,7 +30,7 @@
 </script>
 
 <style>
-  .card{
+  .card {
     border-radius: 25px;
     margin: 15px;
     overflow: hidden;
@@ -35,15 +38,17 @@
   }
 
   .list-group {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
 
   }
 
-  h1, h2 {
+  h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
+    font-family: 'Do Hyeon', sans-serif;
+
   }
 
   ul {
@@ -58,5 +63,26 @@
 
   a {
     color: #42b983;
+  }
+
+  .slide-fade-enter-active {
+    transition: all .2s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateY(2%) ;
+    opacity: 0;
+  }
+
+
+  html{
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .top-pad{
+    padding-top: 65px;
   }
 </style>
