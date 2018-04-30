@@ -31,7 +31,7 @@
 
 
       <router-link
-        v-for="(Post,id) in BlogPosts"
+        v-for="(Post,id) of BlogPosts"
         tag="a"
         :to="'/blog/post/' + Post._id"
         class="list-group-item list-group-item-action"
@@ -47,25 +47,72 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  // import axios from 'axios';
+  import {mapActions} from 'vuex';
+
 
   export default {
+    //
     data() {
       return {
-        BlogPosts: [],
-        errors: []
       }
     },
-    // created lifecycle hook is a built in methodology of Vue JS, triggered when page is created
-    created() {
-      axios.get('/blog/')
-        .then(res => {
-          console.log(res);
-          this.BlogPosts = res.data
-        })
-        .catch(error => console.log(error))
+    computed: {
+        BlogPosts() {
+          return this.$store.getters.blogPosts;
+        }
+        // ,
+        // howManyStocks() {
+        //   return this.$store.getters.stockPortfolio.length
+        // }
+
     },
+    methods: {
+      ...mapActions({
+        // randomizeStocks: 'randomizeStocks',
+        // fetchData: 'loadData',
+        fetchBlogPosts: 'loadBlogPosts'
+      }),
+      // endDay() {
+      //   this.randomizeStocks();
+      // },
+      // saveData() {
+      //   const data = {
+      //     funds: this.$store.getters.funds,
+      //     stockPortfolio: this.$store.getters.stockPortfolio,
+      //     stocks: this.$store.getters.stocks
+      //   };
+      //   this.$http.put('data.json', data);
+      // },
+      // loadData() {
+      //   this.fetchData();
+      // }
+    },
+    // created lifecycle hook is a built in methodology of Vue JS, triggered when page is created
+      created() {
+       this.fetchBlogPosts();
+      }
   }
+
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+  // export default {
+  //   data() {
+  //     return {
+  //
+
+  //     }
+  //   },
+  //   // created lifecycle hook is a built in methodology of Vue JS, triggered when page is created
+  //   created() {
+  //     axios.get('/blog/')
+  //       .then(res => {
+  //         console.log(res);
+  //         this.BlogPosts = res.data
+  //       })
+  //       .catch(error => console.log(error))
+  //   },
+  // }
 </script>
 
 <style scoped>

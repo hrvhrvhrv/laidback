@@ -7,7 +7,7 @@
         class="navbar-brand pull-left"
         to="/"
         v-if="!isNavBarOpen"
-      ><img class="logoIMg" src="../assets/L-Plate.png" alt="logo">
+      ><img class="logoIMg" src="../../assets/L-Plate.png" alt="logo">
         aidBack
       </router-link>
 
@@ -102,7 +102,7 @@
 
       </div>
       <!-- brand logo for when responsive menu is active -->
-      <a class="navbar-brand pull-left" href="#" v-if="isNavBarOpen"><img class="logoIMg" src="../assets/L-Plate.png" alt="logo">LaidBack</a>
+      <a class="navbar-brand pull-left" href="#" v-if="isNavBarOpen"><img class="logoIMg" src="../../assets/L-Plate.png" alt="logo">LaidBack</a>
 
       <!-- toggle button for  responsive menu bar-->
       <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"

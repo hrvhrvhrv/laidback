@@ -2,12 +2,12 @@ import Vue from "vue"
 import Vuetify from"vuetify";
 import VueRouter from "vue-router";
 import axios from "axios";
+import { store } from './store/store'
 
 import 'vuetify/dist/vuetify.min.css'
 
 import App from "./App.vue";
 import { routes } from "./routes";
-// import store from "./store/store";
 
 Vue.use(VueRouter);
 
@@ -28,13 +28,13 @@ Vue.filter('currency', (value) => {
 const router = new VueRouter({
   mode: 'history',
   routes
-  // ,
-  // linkActiveClass: "active",
+  ,
+  linkActiveClass: "active"
 });
 
 new Vue({
   el: '#app',
+  store,
   router,
-  // store,
   render: h => h(App)
 });

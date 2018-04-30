@@ -1,24 +1,24 @@
 <template>
   <div>
     <app-header></app-header>
-    <!--<list-menu></list-menu>-->
-    <!--<card-tile></card-tile>-->
+
     <transition mode="out-in" name="slide-fade">
 
       <router-view class="top-pad"> </router-view>
     </transition>
+    <!--<list-menu></list-menu>-->
+    <card-tile></card-tile>
   </div>
 </template>
 
 <script>
-  import Header from './components/Header.vue';
-  import ListMenu from './components/ListMenu.vue';
+  import Header from './components/Layout/Header.vue';
+  // import ListMenu from './components/Layout/ListMenu.vue';
   import CardTile from './components/CardTile.vue'
 
   export default {
     components: {
       appHeader: Header,
-      ListMenu,
       CardTile
     },
     data() {

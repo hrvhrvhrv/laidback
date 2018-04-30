@@ -1,5 +1,5 @@
-import Home from './components/Home.vue';
-import Blank from './components/BlankComponent.vue';
+import Home from './components/Layout/Home.vue';
+import Blank from './components/Layout/BlankComponent.vue';
 
 
 // blog component imports

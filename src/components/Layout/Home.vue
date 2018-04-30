@@ -28,7 +28,7 @@
                 <div class="device">
                   <div class="screen">
                     <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                    <img src="../assets/L-Plate.png" class="img-fluid" alt="">
+                    <img src="../../assets/L-Plate.png" class="img-fluid" alt="">
                   </div>
                   <div class="button">
                     <!--<router-link-->
