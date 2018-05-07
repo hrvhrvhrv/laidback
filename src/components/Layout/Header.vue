@@ -68,6 +68,7 @@
         </ul>
 
         <router-link
+          v-if="auth"
           class="btn btn-danger my-2 my-sm-0"
           tag="button"
           to="/pupil/all">
@@ -75,13 +76,22 @@
         </router-link>
 
         <router-link
-
+          v-if="!auth"
           class="btn btn-warning my-2 my-sm-0"
           tag="button"
           to="/login"
         >
           Login
         </router-link>
+        <router-link
+          v-if="auth"
+          class="btn btn-warning my-2 my-sm-0"
+          tag="button"
+          to="/login"
+        >
+          LogOut
+        </router-link>
+
         <router-link
 
           class="btn btn-success my-2 my-sm-0"
@@ -123,7 +133,12 @@
         isDropDownOpen: false
 
       }
-    }
+    },
+    computed: {
+      auth () {
+        return this.$store.getters.isAuthenticated
+      }
+    },
   }
 
 </script>

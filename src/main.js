@@ -2,7 +2,7 @@ import Vue from "vue"
 import Vuetify from"vuetify";
 import VueRouter from "vue-router";
 import axios from "axios";
-import { store } from './store/store'
+import store  from './store/store.js'
 
 import 'vuetify/dist/vuetify.min.css'
 
@@ -31,6 +31,46 @@ const router = new VueRouter({
   ,
   linkActiveClass: "active"
 });
+
+
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.adminOnly)) {
+//     //  need to be ale to check the state or could check local storafge
+//     const enter = localStorage.getItem('token');
+//     if ( enter) {
+//       next()
+//     } else {
+//       next('/login')
+//     }
+//   } else {
+//     next();
+//   }
+//
+// });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.adminOnly)) {
+    //  need to be ale to check the state or could check local storafge
+    const enter = localStorage.getItem('token');
+    if ( enter) {
+      next()
+    } else {
+      next('/login')
+    }
+  } else if (to.matched.some(record => record.meta.loggedInOnly)) {
+//  need to be ale to check the state or could check local storafge
+    const enter = localStorage.getItem('token');
+    if ( enter) {
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+    next();
+  }
+
+});
+
 
 new Vue({
   el: '#app',

@@ -12,19 +12,19 @@
       <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label">Lesson Date</label>
         <div class="col-sm-10">
-          <input type="text" v-model="lessonDate" class="form-control" id="" placeholder="Last name">
+          <input type="date" v-model="lessonDate" class="form-control" >
         </div>
       </div>
       <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label">Location</label>
         <div class="col-sm-10">
-          <input type="text" v-model="pickUpLocation" class="form-control" id="" placeholder="Last name">
+          <input type="text" v-model="pickUpLocation" class="form-control" placeholder="Last name">
         </div>
       </div>
       <div class="form-group row">
         <div class="col-sm-10">
-          <button class="btn  btn-success" @click="submit">Submit</button>
-          <button class="btn  btn-danger" @click="clear">Clear</button>
+          <button class="btn  btn-success" @click="returnDate">Submit</button>
+          <!--<button class="btn  btn-danger" @click="clear">Clear</button>-->
         </div>
       </div>
     </form>
@@ -37,8 +37,13 @@
     data() {
       return {
         lessonSLot: 'to be lesson time data',
-        lessonDate: 'to be date input',
+        lessonDate: '',
         pickUpLocation: 'to be map location input'
+      }
+    },
+    methods: {
+      returnDate() {
+        console.log(this.lessonDate)
       }
     }
   }

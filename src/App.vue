@@ -6,20 +6,17 @@
 
       <router-view class="top-pad"> </router-view>
     </transition>
-    <!--<list-menu></list-menu>-->
-    <card-tile></card-tile>
+
   </div>
 </template>
 
 <script>
   import Header from './components/Layout/Header.vue';
-  // import ListMenu from './components/Layout/ListMenu.vue';
-  import CardTile from './components/CardTile.vue'
 
   export default {
     components: {
-      appHeader: Header,
-      CardTile
+      appHeader: Header
+
     },
     data() {
       return {

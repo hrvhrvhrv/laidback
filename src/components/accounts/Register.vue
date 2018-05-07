@@ -126,7 +126,7 @@
           previousLessons: this.previousLessons
         };
         console.log(formData);
-        axios.post('/pupil/add', formData)
+        axios.post('/account/register', formData)
           .then(res => {
             if(res.data.message){
                 // alert(res.data.message)

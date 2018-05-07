@@ -1,35 +1,7 @@
 <template>
-  <!--<ul>-->
-  <!--<li v-for="(Post,id) in BlogPosts">-->
-
-  <!--<h1>{{Post.title}} </h1>-->
-  <!--<p>{{Post.text}}</p>-->
-  <!--<p>v-for id = {{id}}</p>-->
-  <!--<router-link-->
-  <!--class="btn btn-success my-2 my-sm-0"-->
-  <!--tag="button"-->
-  <!--:to="'blog/post/' + Post._id"-->
-  <!--&gt;-->
-  <!--View Blog Post-->
-  <!--</router-link>-->
-  <!--</li>-->
-  <!--<hr>-->
-  <!--<router-link-->
-  <!--class="btn btn-success my-2 my-sm-0"-->
-  <!--tag="button"-->
-  <!--to="blog/new"-->
-  <!--&gt;-->
-  <!--New Blog Post-->
-  <!--</router-link>-->
-  <!--</ul>-->
-
   <div class="row justify-content-around">
-
-
     <div class="list-group col-lg-6 col-lg-offset-2">
       <h1>Laidback blog</h1>
-
-
       <router-link
         v-for="(Post,id) of BlogPosts"
         tag="a"
@@ -37,9 +9,10 @@
         class="list-group-item list-group-item-action"
         :key="Post.id"
       >
+      <!--<button @click="deletePost(Post._id)">Delete</button>  -->
+        <h4>{{Post.title}}</h4>
 
-        <h4>{{Post.title}}</h4></router-link>
-
+      </router-link>
     </div>
   </div>
 
@@ -47,12 +20,10 @@
 </template>
 
 <script>
-  // import axios from 'axios';
+  // mapActions imported form Vuex module
   import {mapActions} from 'vuex';
 
-
   export default {
-    //
     data() {
       return {
       }
@@ -61,32 +32,19 @@
         BlogPosts() {
           return this.$store.getters.blogPosts;
         }
-        // ,
-        // howManyStocks() {
-        //   return this.$store.getters.stockPortfolio.length
-        // }
-
     },
     methods: {
+      //  ES2015 ... is a spreader function, it spreads all in the methods called within the mapActions function of Vuex
       ...mapActions({
-        // randomizeStocks: 'randomizeStocks',
-        // fetchData: 'loadData',
-        fetchBlogPosts: 'loadBlogPosts'
+        fetchBlogPosts: 'loadAllBlog',
+        removeSingleBlogPost: 'deleteBlogPost'
       }),
-      // endDay() {
-      //   this.randomizeStocks();
-      // },
-      // saveData() {
-      //   const data = {
-      //     funds: this.$store.getters.funds,
-      //     stockPortfolio: this.$store.getters.stockPortfolio,
-      //     stocks: this.$store.getters.stocks
-      //   };
-      //   this.$http.put('data.json', data);
-      // },
-      // loadData() {
-      //   this.fetchData();
-      // }
+
+      deletePost(URL) {
+        this.removeSingleBlogPost(URL).then(
+          this.$router.push('/blog')
+        )
+      }
     },
     // created lifecycle hook is a built in methodology of Vue JS, triggered when page is created
       created() {
@@ -94,25 +52,6 @@
       }
   }
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-  // export default {
-  //   data() {
-  //     return {
-  //
-
-  //     }
-  //   },
-  //   // created lifecycle hook is a built in methodology of Vue JS, triggered when page is created
-  //   created() {
-  //     axios.get('/blog/')
-  //       .then(res => {
-  //         console.log(res);
-  //         this.BlogPosts = res.data
-  //       })
-  //       .catch(error => console.log(error))
-  //   },
-  // }
 </script>
 
 <style scoped>

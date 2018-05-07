@@ -1,8 +1,8 @@
 <template>
   <div>
-<h1>{{BlogPosts.title}}</h1>
+<h1>{{SingleBlogPost.title}}</h1>
     <p>This is a blog Post text content {{postID}}</p>
-    <p>{{BlogPosts.text}}</p>
+    <p>{{SingleBlogPost.text}}</p>
 <router-link
 tag="button"
 class="btn btn-primary"
@@ -20,39 +20,41 @@ class="btn btn-primary"
 </template>
 
 <script>
-  import axios from 'axios';
+  // import axios from 'axios';
+  import {mapActions} from 'vuex';
 
   export default {
     data() {
       return {
         postID: this.$route.params.id,
-        BlogPosts: [],
         errors: []
-
       }
     },
+    computed: {
+      SingleBlogPost() {
+        return this.$store.getters.singleBlogPost;
+      },
+      apiURL () {
+        return '/blog/' + this.postID;
+      }
+
+    },
     methods: {
+      ...mapActions({
+        FetchBlogPost: 'loadSingleBlogPost',
+        removeSingleBlogPost: 'deleteBlogPost'
+      }),
+
       deletePost() {
-        const url = '/blog/' + this.postID;
-        axios.delete(url )
-          .then(
-            this.$router.push('/')
-          )
-          .catch(error => console.log(error))
+        this.removeSingleBlogPost(this.apiURL).then(
+          this.$router.push('/')
+        )
       }
     }
     ,
     // created lifecycle hook is a built in methodology of Vue JS, triggered when page is created
     created() {
-      const url = '/blog/' + this.postID;
-      axios.get(url )
-        .then(res => {
-
-          console.log("This is the res");
-          console.log(res);
-          this.BlogPosts = res.data
-        })
-        .catch(error => console.log(error))
+      this.FetchBlogPost(this.apiURL)
     },
   }
 </script>

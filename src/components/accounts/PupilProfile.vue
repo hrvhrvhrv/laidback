@@ -35,7 +35,7 @@
                 </tr>
                 <tr>
                   <td>Email</td>
-                  <td><a href="#">{{Pupil.contact.email}}</a></td>
+                  <td><a href="#">{{Pupil.email}}</a></td>
                 </tr>
                 <tr>
                   <td>Previous Lessons</td>

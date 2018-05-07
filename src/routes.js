@@ -1,6 +1,8 @@
 import Home from './components/Layout/Home.vue';
 import Blank from './components/Layout/BlankComponent.vue';
+import VueRouter from 'vue-router'
 
+import store from './store/store.js'
 
 // blog component imports
 import blog from "./components/blog/blog.vue";
@@ -20,21 +22,20 @@ import PupilProfileEdit from './components/accounts/PupilProfileEdit.vue';
 import Login from './components/accounts/Login.vue';
 
 
-// instructor component imports
-
-
+// routes defined
 export const routes = [
   {path: '/', component: Home},
 
   // Main site routes
-  {path: '/getting-started', component: Blank},
-  {path: '/price', component: Blank},
+  {path: '/getting-started', component: Blank, meta: {adminOnly: true, loggedInOnly: false}},
+  {path: '/price', component: Blank, meta: {adminOnly: false, loggedInOnly: true}},
   {path: '/about-us', component: Blank},
   {path: '/contact', component: Blank},
 
 
   // Blog routes set with nested routing as children components / paths
-  {path: '/blog', component: blog, children: [
+  {
+    path: '/blog', component: blog, children: [
       // the default for this route is to show the list of blog posts
       {path: '', component: blogList},
       // post/:id shows single specific blog post based on its id parameter passed in URL
@@ -42,7 +43,8 @@ export const routes = [
       // /exit/id
       {path: 'post/edit/:id', component: blogPostEdit},
       {path: 'new', component: NewBlogPost}
-    ]},
+    ]
+  },
 
 
   //  Lesson routes
@@ -57,7 +59,9 @@ export const routes = [
   {path: '/login', component: Login},
   {path: '/instructor-homepage', component: Blank},
   {path: '/pupil-homepage', component: Blank},
-  {path: '/pupil/all', component: AllPupils},
+  {path: '/pupil/all', component: AllPupils,  meta: {adminOnly: true, loggedInOnly: false}},
   {path: '/pupil/:id', component: PupilProfile},
   {path: '/pupil/edit/:id', component: PupilProfileEdit},
 ];
+
+// export default new VueRouter({mode: 'history', routes})

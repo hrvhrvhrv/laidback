@@ -1,55 +1,63 @@
 import axios from "axios/index";
 
 
-const state = {
-  blogPosts: []
+export const state = {
+  allBlogPosts: {},
+  SingleBlogPost:{}
 };
 
-const mutations = {
-  'SET_BLOG_POSTS' (state, blogPosts) {
-    state.blogPosts = blogPosts;
+export const mutations = {
+  'SET_ALL_BLOG_POSTS' (state, blogPosts) {
+    state.allBlogPosts = blogPosts;
   },
-  // 'RND_STOCKS' (state) {
-  //   state.stocks.forEach(stock => {
-  //     stock.price = Math.round(stock.price * (1 + Math.random() - 0.5));
-  //   });
-  // }
+
+  'SET_SINGLE_BLOG_POST' (state, blogPost) {
+    state.SingleBlogPost = blogPost;
+    }
+
 };
 
-const actions = {
-  buyStock: ({commit}, order) => {
-    commit('BUY_STOCK', order);
+export const actions = {
+  loadSingleBlogPost: ({commit}, URL) => {
+    axios.get(URL )
+      .then(res => {
+        if (res) {
+          const blogPost = res.data;
+        // console.log("This is the res");
+        // console.log(res);
+        commit('SET_SINGLE_BLOG_POST', blogPost);
+      }
+      })
+      .catch(error => console.log(error))
   },
-  initStocks: ({commit}) => {
-    commit('SET_STOCKS', stocks);
-  },
-  randomizeStocks: ({commit}) => {
-    commit('RND_STOCKS');
-  },
-  loadBlogPosts: ({commit}) => {
+  loadAllBlog: ({commit}) => {
     axios.get('/blog/')
       .then(res => {
         if (res) {
-          const blogs = res.data;
+          const blog = res.data;
           // console.log('this is from Actions JS');
           // console.log(blogs);
-          commit('SET_BLOG_POSTS', blogs);
+          commit('SET_ALL_BLOG_POSTS', blog);
         }
       })
       .catch(error => console.log(error))
 
+  },
+
+  deleteBlogPost: (URL) => {
+    axios.delete(URL )
+      .catch(error => console.log(error))
   }
 };
 
-const getters = {
+export const getters = {
   blogPosts: state => {
-    return state.blogPosts;
+    return state.allBlogPosts;
+  },
+  singleBlogPost: state => {
+
+    return state.SingleBlogPost;
+
   }
 };
 
-export default {
-  state,
-  mutations,
-  actions,
-  getters
-};
