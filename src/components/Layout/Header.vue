@@ -83,14 +83,16 @@
         >
           Login
         </router-link>
-        <router-link
-          v-if="auth"
-          class="btn btn-warning my-2 my-sm-0"
-          tag="button"
-          to="/login"
-        >
-          LogOut
-        </router-link>
+        <!--<router-link-->
+          <!--v-if="auth"-->
+          <!--class="btn btn-warning my-2 my-sm-0"-->
+          <!--tag="button"-->
+          <!--to="/login"-->
+        <!--&gt;-->
+          <!--LogOut-->
+        <!--</router-link>-->
+        <button v-if="auth" class="btn btn-primary" @click="onLogout" >Delete</button>
+
 
         <router-link
 
@@ -139,6 +141,13 @@
         return this.$store.getters.isAuthenticated
       }
     },
+
+    methods: {
+      onLogout() {
+        this.$store.dispatch('logout');
+        this.$router.push('/login');
+      }
+    }
   }
 
 </script>
