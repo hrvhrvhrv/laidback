@@ -1,55 +1,193 @@
 <template>
-  <div class="container"><h1>Book a lesson with Laidback</h1>
-    <p>This is to be used book lessons with the lesson</p>
-    <h4>This page is not working at present</h4>
-    <form class="col-lg-6 " v-on:submit.prevent>
-      <div class="form-group row">
-        <label for="" class="col-sm-2 col-form-label">Lesson Slot</label>
-        <div class="col-sm-10">
-          <input type="text" v-model="lessonSLot" class="form-control" id="" placeholder="First name">
-        </div>
+  <div>
+
+    <div class="page-wrapper col-md-8 offset-md-2">
+      <div class="blog-headline">
+        <h1>Lesson for {{fullName}}</h1>
+        <hr>
+
+
+        <p v-if="lessonDate !== '' ">{{ lessonDate }} - {{lessonSLot}} -
+          {{lessonLocation}}</p>
       </div>
-      <div class="form-group row">
-        <label for="" class="col-sm-2 col-form-label">Lesson Date</label>
-        <div class="col-sm-10">
-          <input type="date" v-model="lessonDate" class="form-control" >
+
+      <div class="tab-layout-container">
+        <div class="tab-layout-small">
+          <p>{{year}} {{thisDate}} pang</p>
+          <p>Select the date of a lesson {{newTimePlease}}</p>
+          <v-calendar
+            :attributes='attrs'
+            v-model="lessonyingdate"
+          >
+          </v-calendar>
+
         </div>
-      </div>
-      <div class="form-group row">
-        <label for="" class="col-sm-2 col-form-label">Location</label>
-        <div class="col-sm-10">
-          <input type="text" v-model="pickUpLocation" class="form-control" placeholder="Last name">
+        <div class="tab-layout-large">
+          <form class=" " @submit.prevent="onSubmit">
+            <div class="form-group"><!--<form  v-on:submit.prevent>-->
+              <div class="col-sm-10 form-group row">
+                <label class="col-form-label">Select the time of a lesson</label>
+                <select v-model="lessonSLot" class="form-control form-control-lg">
+                  <option>8am</option>
+                  <option>11am</option>
+                  <option>2pm</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-sm-10 form-group row">
+
+
+                <label class="col-form-label">Select the pick up location of the lesson</label>
+                <input type="text" v-model="lessonLocation" class="form-control" placeholder="Location">
+
+              </div>
+            </div>
+            <div class="form-group row justify-space-around">
+              <div class="flex-row">
+                <!--<div class="btn-base btn-submit" @click="submit">-->
+                <!--Submit-->
+                <!--</div>-->
+
+                <!--<div class="btn-base btn-clear" @click="clear">-->
+                <!--Clear form-->
+                <!--</div>-->
+              </div>
+
+            </div>
+
+
+          </form>
+
         </div>
+
       </div>
-      <div class="form-group row">
-        <div class="col-sm-10">
-          <button class="btn  btn-success" @click="returnDate">Submit</button>
-          <!--<button class="btn  btn-danger" @click="clear">Clear</button>-->
-        </div>
-      </div>
-    </form>
+
+    </div>
+
   </div>
 
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default {
     data() {
+
+
       return {
-        lessonSLot: 'to be lesson time data',
-        lessonDate: '',
-        pickUpLocation: 'to be map location input'
+        attrs: [
+          {
+            key: 'today',
+            highlight: {
+              backgroundColor: '#ff8080',
+              // Other properties are available too, like `height` & `borderRadius`
+            },
+            dates: [new Date(2018, 5, 21)]
+          }
+        ],
+        postID: this.$route.params.id,
+        errors: [],
+        Lesson: [],
+        Pupil: [],
+        day: 15,
+        month: 8,
+        year: 2018,
+        lessonyingdate: new Date()
       }
     },
+    computed: {
+
+
+      SingleBlogPost() {
+        return this.$store.getters.singleBlogPost;
+      },
+      apiURLLesson() {
+        return '/lesson/' + this.postID;
+      },
+      apiURLPupil() {
+        return '/pupil/' + this.Lesson.pupilID;
+      },
+      lessonSLot() {
+        return this.Lesson.lessonSLot
+      }
+      ,
+      lessonDate() {
+        return new Date(this.Lesson.lessonDate)
+      },
+      lessonLocation() {
+        return this.Lesson.pickUpLocation
+      },
+      fullName() {
+        return this.Pupil.firstName + ' ' + this.Pupil.lastName
+      },
+      thisDate() {
+        let trimedDate = this.Lesson.lessonDate.substr(0, 10);
+        let splitDateArray = trimedDate.split('-');
+        this.year = parseInt(splitDateArray[0]);
+        this.month = parseInt(splitDateArray[1]) - 1;
+        this.day = parseInt(splitDateArray[2]) + 1;
+
+        return trimedDate
+
+      },
+      newTimePlease() {
+        return new Date(this.year, this.month, this.day)
+      }
+
+
+    },
+
     methods: {
-      returnDate() {
-        console.log(this.lessonDate)
+
+      deletePost() {
+        this.removeSingleBlogPost(this.apiURL).then(
+          this.$router.push('/')
+        )
+      },
+      getPupils(pupil) {
+        let pupURL = '/pupil/' + pupil;
+
+
+        console.log(pupURL)
+        axios.get(pupURL)
+          .then(res => {
+
+            console.log("This is the res");
+            console.log(res);
+            this.Pupil = res.data;
+            console.log("Pupil Data" + res.data)
+          })
+          .catch(error => console.log(error));
       }
     }
+    ,
+    // created lifecycle hook is a built in methodology of Vue JS, triggered when page is created
+    created() {
+      axios.get(this.apiURLLesson)
+        .then(res => {
+
+          console.log("This is the res");
+          console.log(res);
+          this.Lesson = res.data;
+
+
+          // pupil ID taken from Response and passed to function to get pupil name and data from database
+          let pupID = res.data.pupilId;
+          this.getPupils(pupID)
+        })
+        .catch(error => console.log(error));
+
+      console.log(new Date())
+    },
+
   }
 </script>
 
 <style scoped>
 
 </style>
-s
+

@@ -1,17 +1,33 @@
 import Vue from "vue"
-import Vuetify from"vuetify";
+// import Vuetify from"vuetify";
 import VueRouter from "vue-router";
 import axios from "axios";
-import store  from './store/store.js'
+import store  from './store/store.js';
+import Vuemoment from 'vue-moment';
+import Vuelidate from 'vuelidate'
 
-import 'vuetify/dist/vuetify.min.css'
+
+
+import VCalendar from 'v-calendar';
+import 'v-calendar/lib/v-calendar.min.css';
 
 import App from "./App.vue";
 import { routes } from "./routes";
 
 Vue.use(VueRouter);
 
-Vue.use(Vuetify);
+//  Vuelidate is a plugin used to validate forms
+Vue.use(Vuelidate);
+
+// Vue - moment is a plugin used to parse the date object
+Vue.use(Vuemoment);
+
+// Use v-calendar, v-date-picker & v-popover components
+Vue.use(VCalendar, {
+  firstDayOfWeek: 2,
+  titlePosition: "left",
+  datePickerTintColor: "#d0021b"
+});
 
 // Vue.http.options.root = 'https://vuejs-stock-trader-c7441.firebaseio.com/';
 // Vue.http.options.root = 'http://localhost:3005/v1/';
@@ -33,34 +49,29 @@ const router = new VueRouter({
 });
 
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.adminOnly)) {
-//     //  need to be ale to check the state or could check local storafge
-//     const enter = localStorage.getItem('token');
-//     if ( enter) {
-//       next()
-//     } else {
-//       next('/login')
-//     }
-//   } else {
-//     next();
-//   }
-//
-// });
+
+
 
 router.beforeEach((to, from, next) => {
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 100);
+  next();
   if (to.matched.some(record => record.meta.adminOnly)) {
-    //  need to be ale to check the state or could check local storafge
+
     const enter = localStorage.getItem('token');
-    if ( enter) {
+    const role = localStorage.getItem('role');
+    if ( enter && role === "Admin") {
       next()
-    } else {
+    }
+
+    else {
       next('/login')
     }
   } else if (to.matched.some(record => record.meta.loggedInOnly)) {
-//  need to be ale to check the state or could check local storafge
+//  need to be ale to check the state or could check local storage
     const enter = localStorage.getItem('token');
-    if ( enter) {
+    if ( enter && role === "Registered") {
       next()
     } else {
       next('/login')

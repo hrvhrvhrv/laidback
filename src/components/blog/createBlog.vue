@@ -1,7 +1,16 @@
 <template>
-  <div class="container">
-    <h1>Create a new blog post </h1>
-    <p>Fill in a title then enter your text and click save to publish the blog post</p>
+
+  <div class="page-wrapper col-md-8 offset-md-2">
+
+    <div class="blog-headline">
+      <h1>Create a new blog post
+        <hr>
+      </h1>
+      <p>Fill in a title then enter your text and click save to publish the blog post</p>
+    </div>
+
+
+
   <form class="col-lg-6 " v-on:submit.prevent>
     <div class="form-group row">
       <label for="input-blog-title" class="col-sm-2 col-form-label">Blog Title</label>

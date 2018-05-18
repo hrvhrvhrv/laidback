@@ -1,18 +1,49 @@
 <template>
   <div>
-<h1>{{SingleBlogPost.title}}</h1>
-    <p>This is a blog Post text content {{postID}}</p>
-    <p>{{SingleBlogPost.text}}</p>
-<router-link
-tag="button"
-class="btn btn-primary"
-:to="'/blog/post/edit/' + $route.params.id"
->
-  Edit
-</router-link>
-    <button class="btn btn-primary" @click="deletePost" >Delete</button>
+
+    <div class="page-wrapper col-md-8 offset-md-2">
+      <div class="blog-headline">
+        <h1>{{SingleBlogPost.title}}
+
+        </h1>
+        <hr>
+
+      </div>
+      <div class="tab-layout-container">
+
+        <div class="tab-layout-large">
+
+          <p>{{SingleBlogPost.text}}</p>
+        </div>
+        <div class="tab-layout-small">
+          <p>Published {{SingleBlogPost.created | moment("dddd, MMMM Do YYYY, h:mm:ss a")}}</p>
+          <h2>Blog Controls</h2>
+          <div class="row">
+            <!--<router-link-->
+            <!--style="height: 75px;"-->
+            <!--class="btn-base button1"-->
+            <!--tag="button"-->
+            <!--to="/blog/new">-->
+            <!--<p>add post</p>-->
+            <!--</router-link>-->
 
 
+            <router-link
+              tag="div"
+              style="height: 75px;"
+              class="btn-base button1"
+              :to="'/blog/post/edit/' + $route.params.id"
+            >
+              Edit
+            </router-link>
+            <div class="btn-base button1" @click="deletePost">Delete</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
 
@@ -34,7 +65,7 @@ class="btn btn-primary"
       SingleBlogPost() {
         return this.$store.getters.singleBlogPost;
       },
-      apiURL () {
+      apiURL() {
         return '/blog/' + this.postID;
       }
 
@@ -60,7 +91,9 @@ class="btn btn-primary"
 </script>
 
 <style scoped>
-h1 {
-  color: blueviolet;
-}
+  .blogPost-wrap {
+    text-align: left;
+    min-height: 40vh;
+    padding: 15px;
+  }
 </style>

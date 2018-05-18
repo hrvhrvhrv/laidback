@@ -5,20 +5,25 @@ import router from '../../routes'
 export const state = {
   idToken: null,
   userId: null,
-  userName: null
+  userName: null,
+  role: null
 };
 
 export const mutations = {
   authUser(state, userData) {
     state.idToken = userData.token;
     state.userId = userData.userId;
+    state.role = userData.role;
   },
   storeUser(state, user) {
-    state.userName = user
+    state.userName = user;
+    state.role = user.role;
   },
   clearAuthData(state) {
     state.idToken = null;
     state.userId = null;
+    state.role = null;
+
   }
 };
 
@@ -56,26 +61,37 @@ export const actions = {
   //     .catch(error => console.log(error));
   // },
   login({commit, dispatch}, authData) {
-    axios.post('/account/login', {
-      email: authData.email,
-      password: authData.password
-    })
-      .then(res => {
-        console.log(res);
-        const now = new Date();
-        const expirationDate = new Date(now.getTime() + res.data.expiresIn * 1000);
-        localStorage.setItem('token', res.data.idToken);
-        localStorage.setItem('userId', res.data.localId);
-        localStorage.setItem('expirationDate', expirationDate);
-        commit('authUser', {
-          token: res.data.idToken,
-          userId: res.data.localId
-        });
-        commit('storeUser', res.data);
-        dispatch('setLogoutTimer', res.data.expiresIn);
+    return new Promise(resolve => {
+      axios.post('/account/login', {
+        email: authData.email,
+        password: authData.password
       })
-      .catch(error => console.log(error))
+        .then(res => {
+          console.log(res);
+          const now = new Date();
+          const expirationDate = new Date(now.getTime() + res.data.expiresIn * 1000);
+          localStorage.setItem('token', res.data.idToken);
+          localStorage.setItem('userId', res.data.localId);
+          localStorage.setItem('expirationDate', expirationDate);
+          localStorage.setItem('role', res.data.role);
+          commit('authUser', {
+            token: res.data.idToken,
+            userId: res.data.localId,
+            role:res.data.role
+
+          });
+          commit('storeUser', res.data);
+          dispatch('setLogoutTimer', res.data.expiresIn);
+          let role = res.data.role;
+          let usedID = res.data.localId;
+          resolve([role, usedID])
+        })
+        .catch(error => console.log(error))
+    })
+
   },
+
+
   tryAutoLogin({commit}) {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -87,9 +103,10 @@ export const actions = {
       return
     }
     const userId = localStorage.getItem('userId');
+    const userRole = localStorage.getItem('role');
     commit('authUser', {
       token: token,
-      userId: userId
+      userId: userId, role:userRole
     })
   },
   logout({commit}) {
@@ -97,6 +114,7 @@ export const actions = {
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    localStorage.removeItem('role');
 
   },
   // storeUser({commit, state}, userData) {
@@ -131,10 +149,16 @@ export const actions = {
 
 export const getters = {
   user(state) {
-    return state.user
+    return state.userName
   },
   isAuthenticated(state) {
     return state.idToken !== null
+  },
+  userRole(state) {
+    return state.role
+  },
+  userIdStore(state) {
+    return state.userId
   }
 };
 

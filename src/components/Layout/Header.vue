@@ -1,120 +1,118 @@
 <template>
   <header>
+
+
+    <!--<headerNonRegistered v-if="!auth"></headerNonRegistered>-->
+    <!--<headerPupil v-if="auth"></headerPupil>-->
+    <!--<headerInstructor ></headerInstructor>-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
       <!--Router link used to tell Vue JS to route to new page-->
+
       <!-- brand logo link page top[ left-->
       <router-link
         class="navbar-brand pull-left"
+        to="/instructorHomepage"
+        v-if="!isNavBarOpen && whatRole === 'Admin'"
+      ><img class="logoIMg" src="../../assets/L-Plate.png" alt="logo">
+        aidBack
+      </router-link>
+      <router-link
+        class="navbar-brand pull-left"
         to="/"
-        v-if="!isNavBarOpen"
+        v-if="!isNavBarOpen && whatRole !== 'Admin'"
       ><img class="logoIMg" src="../../assets/L-Plate.png" alt="logo">
         aidBack
       </router-link>
 
-      <div class="collapse navbar-collapse " :class="{ show: isNavBarOpen}" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-<!--getting started link button-->
-          <li class="nav-item">
-            <router-link
-              class="nav-link"
-              tag="a"
-              to="/getting-started"
-            >
-              Get Started
-            </router-link>
-          </li>
 
-<!-- contact link button-->
-          <li class="nav-item">
-          <router-link
-            class="nav-link"
-            tag="a"
-            to="/about-us"
-          >
-            About
-          </router-link>
-          </li>
-<!-- contact link button-->
+      <div class="collapse navbar-collapse " :class="{ show: isNavBarOpen}" >
+        <ul class="navbar-nav mr-auto">
+          <!-- contact link button-->
           <li class="nav-item">
             <router-link
               class="nav-link"
               tag="a"
-            to="/contact"
-          >
-            Contact
+              to="/about-us"
+            >
+              About
             </router-link>
           </li>
-<!-- prices link button-->
+          <!-- contact link button-->
           <li class="nav-item">
             <router-link
               class="nav-link"
               tag="a"
-            to="/price"
-          >
-            Prices
-          </router-link>
+              to="/contact"
+            >
+              Contact
+            </router-link>
           </li>
-<!-- Link to blog-->
+          <!-- prices link button-->
           <li class="nav-item">
             <router-link
               class="nav-link"
               tag="a"
-            to="/blog"
-          >
-            Blog
-          </router-link>
+              to="/price"
+            >
+              Prices
+            </router-link>
+          </li>
+          <!-- Link to blog-->
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              tag="a"
+              to="/blog"
+            >
+              Blog
+            </router-link>
           </li>
 
         </ul>
 
-        <router-link
-          v-if="auth"
-          class="btn btn-danger my-2 my-sm-0"
-          tag="button"
-          to="/pupil/all">
-          Pupil All
-        </router-link>
+
+
+
 
         <router-link
-          v-if="!auth"
+          v-if="whatRole === 'Admin'"
+          class="btn btn-success my-2 my-sm-0"
+          tag="button"
+          to="/instructorHomepage"
+        >
+          Admin Page
+        </router-link>
+        <router-link
+          v-if="whatRole === 'Registered'"
+          class="btn btn-success my-2 my-sm-0"
+          tag="button"
+          :to="'/pupil/'+ storeUserID"
+        >
+          My Profile
+        </router-link>
+        <router-link
           class="btn btn-warning my-2 my-sm-0"
           tag="button"
           to="/login"
+          v-if="!auth"
         >
           Login
         </router-link>
-        <!--<router-link-->
-          <!--v-if="auth"-->
-          <!--class="btn btn-warning my-2 my-sm-0"-->
-          <!--tag="button"-->
-          <!--to="/login"-->
-        <!--&gt;-->
-          <!--LogOut-->
-        <!--</router-link>-->
-        <button v-if="auth" class="btn btn-primary" @click="onLogout" >Delete</button>
 
-
-        <router-link
-
-          class="btn btn-success my-2 my-sm-0"
-          tag="button"
-          to="/lesson"
-        >
-          Lesson
-        </router-link>
         <router-link
 
           class="btn btn-info my-2 my-sm-0"
           tag="button"
           to="/register"
+          v-if="!auth"
         >
           register
         </router-link>
 
-
+        <button class="btn btn-primary" @click="onLogout" v-if="auth" >Logout</button>
       </div>
       <!-- brand logo for when responsive menu is active -->
-      <a class="navbar-brand pull-left" href="#" v-if="isNavBarOpen"><img class="logoIMg" src="../../assets/L-Plate.png" alt="logo">LaidBack</a>
+      <a class="navbar-brand pull-left" href="#" v-if="isNavBarOpen">LaidBack</a>
 
       <!-- toggle button for  responsive menu bar-->
       <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -124,25 +122,44 @@
 
 
     </nav>
+
   </header>
 </template>
 
 <script>
+  import headerNonRegistered from './headers/Header-non-registered.vue';
+  import headerPupil from './headers/Header-Pupil.vue';
+  import headerInstructor from './headers/Header-Instructor.vue';
+
   export default {
+    components: {
+      headerNonRegistered,
+      headerPupil,
+      headerInstructor
+    },
     data() {
       return {
         isNavBarOpen: false,
-        isDropDownOpen: false
+        isDropDownOpen: false,
+        role: ''
 
       }
     },
     computed: {
-      auth () {
+      auth() {
         return this.$store.getters.isAuthenticated
+      },
+      whatRole() {
+        return this.$store.getters.userRole
+      },
+      storeUserID() {
+        return this.$store.getters.userIdStore
       }
+
     },
 
     methods: {
+
       onLogout() {
         this.$store.dispatch('logout');
         this.$router.push('/login');
@@ -153,10 +170,8 @@
 </script>
 
 <style scoped>
-.logoIMg{
-  height: 40px;
-}
-.navbar{
-  box-shadow: 0 5px 15px grey;
-}
+  .logoIMg {
+    height: 40px;
+  }
+
 </style>

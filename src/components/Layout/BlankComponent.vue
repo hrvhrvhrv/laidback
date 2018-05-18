@@ -1,11 +1,18 @@
-<template><div class="container">
+<template>
+  <div>
 
-    <h2>This is a blank Component</h2>
-  <p>The route has been made but an blank component has been passed into the route</p>
-  <hr>
-  <h1>To be developed</h1>
-  <button class="btn btn-primary" @click="onLogout" >Delete</button>
+    <div class="page-wrapper col-md-8 offset-md-2">
+      <div class="blog-headline">
+        <h1>This is a blank Component<hr>
+        </h1>
+      </div>
+      <div class="col-md-9 ">
+        <p>The route has been made but an blank component has been passed into the route</p>
+      </div>
 
+      <button class="btn btn-primary" @click="onLogout">Logout</button>
+
+    </div>
   </div>
 </template>
 
@@ -14,14 +21,14 @@
 
   export default {
     computed: {
-      email () {
+      email() {
         return !this.$store.getters.user ? false : this.$store.getters.user.email
       },
-      auth () {
+      auth() {
         return this.$store.getters.isAuthenticated
       }
     },
-    created () {
+    created() {
       this.$store.dispatch('fetchUser')
     },
     methods: {
