@@ -1,33 +1,33 @@
 <template>
 
   <div class="tab-layout-large col-md-8 ">
-    <div class="col-md-12 ">
+    <div class="col-md-11 ">
       <h4>Update your contact details</h4>
-      <form class="col-lg-12 " v-on:submit.prevent>
+      <form class="col-lg-11 " v-on:submit.prevent>
 
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Email</label>
-          <div class="col-md-10">
+          <div class="col-md-11">
             <input type="text" v-model="Pupil.email" class="" placeholder="Email">
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Phone Number</label>
-          <div class="col-sm-10">
+          <div class="col-sm-11">
             <input type="text" v-model="Pupil.phoneNumber" class="form-control"
                    placeholder="Phone number">
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Pick Up Location</label>
-          <div class="col-sm-10">
+          <div class="col-sm-11">
             <input type="text" v-model="Pupil.location" class="form-control"
                    placeholder="Location">
           </div>
         </div>
 
         <div class="form-group row">
-          <div class="col-sm-10">
+          <div class="col-sm-11">
             <!--<button class="btn-bas" @click="submit">Submit</button>-->
             <!--<button class="btn  btn-danger" @click="cancel">Cancel</button>-->
 
@@ -60,18 +60,19 @@
 
 
   export default {
+    props: ['Pupil'],
 
     data() {
       return {
         pupilID: this.$route.params.id,
-        Pupil: [],
+
         errors: []
 
       }
     }, computed: {
-      // userName() {
-      //   return this.Pupil.firstName + ' ' + this.Pupil.lastName
-      // }
+      userName() {
+        return this.Pupil.firstName + ' ' + this.Pupil.lastName
+      }
     },
     methods: {
       submit() {
@@ -93,11 +94,11 @@
           .then(res => {
             console.log(res);
             // this allows for redirecting to another page once code has been executed
-
+this.$router.go()
           }).catch(error => console.log(error))
       },
       cancel() {
-        // this.$router.push('/pupil/' + this.pupilID)
+        this.$router.go(this.$router.currentRoute)
       },
       deletePupil() {
         // const url = '/pupil/' + this.pupilID;
@@ -111,15 +112,15 @@
     ,
     // created lifecycle hook is a built in methodology of Vue JS, triggered when page is created
     created() {
-      const url = '/pupil/' + this.pupilID;
-      axios.get(url)
-        .then(res => {
-
-          console.log("This is the res");
-          console.log(res);
-          this.Pupil = res.data
-        })
-        .catch(error => console.log(error))
+      // const url = '/pupil/' + this.pupilID;
+      // axios.get(url)
+      //   .then(res => {
+      //
+      //     console.log("This is the res");
+      //     console.log(res);
+      //     this.Pupil = res.data
+      //   })
+      //   .catch(error => console.log(error))
     },
   }
 </script>

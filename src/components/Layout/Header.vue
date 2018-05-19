@@ -25,7 +25,7 @@
       </router-link>
 
 
-      <div class="collapse navbar-collapse " :class="{ show: isNavBarOpen}" >
+      <div class="collapse navbar-collapse " :class="{ show: isNavBarOpen}">
         <ul class="navbar-nav mr-auto">
           <!-- contact link button-->
           <li class="nav-item">
@@ -71,45 +71,44 @@
         </ul>
 
 
+        <div class="col-md-2 col-sm-12 row ">
 
+          <router-link
+            v-if="whatRole === 'Admin'"
+            class="btn-base btn-cancel"
+            tag="button"
+            to="/instructorHomepage"
+          >
+            Admin Page
+          </router-link>
+          <router-link
+            v-if="whatRole === 'Registered'"
+            class="btn-base btn-cancel"
+            tag="button"
+            :to="'/pupil/'+ storeUserID"
+          >
+            My Profile
+          </router-link>
+          <router-link
+            class="btn-base btn-cancel"
+            tag="button"
+            to="/login"
+            v-if="!auth"
+          >
+            Login
+          </router-link>
 
+          <router-link
+            class="btn-base btn-submit"
+            tag="button"
+            to="/register"
+            v-if="!auth"
+          >
+            register
+          </router-link>
 
-        <router-link
-          v-if="whatRole === 'Admin'"
-          class="btn btn-success my-2 my-sm-0"
-          tag="button"
-          to="/instructorHomepage"
-        >
-          Admin Page
-        </router-link>
-        <router-link
-          v-if="whatRole === 'Registered'"
-          class="btn btn-success my-2 my-sm-0"
-          tag="button"
-          :to="'/pupil/'+ storeUserID"
-        >
-          My Profile
-        </router-link>
-        <router-link
-          class="btn btn-warning my-2 my-sm-0"
-          tag="button"
-          to="/login"
-          v-if="!auth"
-        >
-          Login
-        </router-link>
-
-        <router-link
-
-          class="btn btn-info my-2 my-sm-0"
-          tag="button"
-          to="/register"
-          v-if="!auth"
-        >
-          register
-        </router-link>
-
-        <button class="btn btn-primary" @click="onLogout" v-if="auth" >Logout</button>
+          <button class="btn-base btn-submit" @click="onLogout" v-if="auth">Logout</button>
+        </div>
       </div>
       <!-- brand logo for when responsive menu is active -->
       <a class="navbar-brand pull-left" href="#" v-if="isNavBarOpen">LaidBack</a>
@@ -171,7 +170,7 @@
 
 <style scoped>
   .logoIMg {
-    height: 40px;
+    height: 75px;
   }
 
 </style>

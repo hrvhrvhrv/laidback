@@ -12,7 +12,7 @@
         <div class='profile-pic'>
           <img src="../../assets/logo.png" alt="">
         </div>
-        <div style="padding: 30px 0 0 30px">
+        <div style="padding: 30px 0 0 30px" v-if="!showEdit">
           <h2>{{Pupil.firstName}} {{Pupil.lastName}}</h2>
           <p>{{Pupil.location}}</p>
           <p>{{Pupil.phoneNumber}}</p>
@@ -20,14 +20,12 @@
           <p>{{role}}</p>
           <p>Total Number of Lessons <br> {{numberOfLessons}}</p>
           <p>Remaining Block Booking <br> {{ blockBookings }} / 10</p>
-          <button
-            @click="showEdit = !showEdit"
-            class="btn-base button1"
-          >
-            <i class="fas fa-graduation-cap"></i>
-            Edit Profile
-          </button>
+
         </div>
+        <editTheForm
+          v-if="showEdit"
+          v-bind:Pupil="Pupil"
+        ></editTheForm>
 
       </div>
       <div class="tab-layout-large col ">
@@ -115,9 +113,15 @@
             <i class="fas fa-graduation-cap"></i>
             New Lesson
           </router-link>
-
+          <button
+            @click="showEdit = !showEdit"
+            class="btn-base button1"
+          >
+            <i class="fas fa-graduation-cap"></i>
+            Edit Profile
+          </button>
         </div>
-        <editTheForm v-if="showEdit"></editTheForm>
+
       </div>
     </div>
   </div>
@@ -136,9 +140,7 @@
       return {
         showEdit:false,
         pupilID: this.$route.params.id,
-        Pupil: [
-          {}
-        ],
+        Pupil: [],
         errors: []
       }
     },
