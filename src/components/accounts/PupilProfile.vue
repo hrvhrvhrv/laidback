@@ -22,14 +22,27 @@
           <p>Remaining Block Booking <br> {{ blockBookings }} / 10</p>
 
         </div>
+
+        <transition name="fade" mode="in-out">
+
         <editTheForm
           v-if="showEdit"
           v-bind:Pupil="Pupil"
         ></editTheForm>
-
+        </transition>
       </div>
       <div class="tab-layout-large col ">
-
+        <button
+          @click="showNewLesson = !showNewLesson"
+          class="btn-base button2"
+        >
+          <i class="fas fa-graduation-cap"></i>
+          New Lesson
+        </button>
+        <transition name="fade" mode="out-in">
+        <addNewLesson
+          v-if="showNewLesson"
+        ></addNewLesson></transition>
         <div v-if="role === 'Applicant'">
           <h1>Registration Request</h1>
           <hr>
@@ -105,14 +118,15 @@
             </div>
           </div>
           <h2>Previous lesson</h2>
-          <router-link
-            tag="div"
-            :to="'/lesson/new/'+ Pupil._id"
-            class="btn-base button2"
-          >
-            <i class="fas fa-graduation-cap"></i>
-            New Lesson
-          </router-link>
+
+          <!--<router-link-->
+            <!--tag="div"-->
+            <!--:to="'/lesson/new/'+ Pupil._id"-->
+            <!--class="btn-base button2"-->
+          <!--&gt;-->
+            <!--<i class="fas fa-graduation-cap"></i>-->
+            <!--New Lesson-->
+          <!--</router-link>-->
           <button
             @click="showEdit = !showEdit"
             class="btn-base button1"
@@ -131,14 +145,17 @@
 <script>
   import axios from 'axios';
   import editForm from './PupilProfileEdit.vue';
+  import newLesson from '../lesson/NewLesson.vue';
 
   export default {
     components:{
-      editTheForm: editForm
+      editTheForm: editForm,
+      addNewLesson:newLesson
     },
     data() {
       return {
         showEdit:false,
+        showNewLesson:false,
         pupilID: this.$route.params.id,
         Pupil: [],
         errors: []
@@ -221,5 +238,10 @@
   .profileImage, .pupil-text {
     padding-top: 15px;
   }
-
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
 </style>

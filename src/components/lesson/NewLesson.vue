@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="page-wrapper col-md-8 offset-md-2">
+
       <div class="blog-headline">
         <h1>Book a lesson</h1>
         <hr>
@@ -71,13 +71,14 @@
 
     </div>
 
-  </div>
+
 </template>
 
 <script>
   import axios from 'axios';
 
   export default {
+    props: [],
     data() {
       return {
 
@@ -164,7 +165,7 @@
 
             console.log(res);
             // this allows for redirecting to another page once code has been executed
-            this.$router.push('/pupil/' + this.pupilID)
+            // this.$router.go();
           }).catch(error => console.log(error))
       }
       ,

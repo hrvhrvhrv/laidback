@@ -1,16 +1,10 @@
 <template>
 
 
-  <div class="page-wrapper col-md-8 offset-md-2">
-    <div class="blog-headline">
-      <h1>Registered Pupils</h1>
-      <hr>
-    </div>
+
     <div class="tab-layout-container">
-      <div class="tab-layout-large col ">
-
-
-
+      <div class="tab-layout-large">
+        <h2>Registered Pupils</h2>
         <div v-for="pupil of Pupils" class="Lesson-list-item flex-row">
           <div class="imageWrapper">
             <div class="profileImage">
@@ -18,64 +12,32 @@
             </div>
           </div>
           <div class="text-container flex-column">
-
             <h5 class="pupil-text ">{{pupil.firstName}} {{pupil.lastName}}</h5>
-
           </div>
-
           <div class="flex-row button-container">
-            <router-link
-              tag="div"
-              :to="'/pupil/edit/' + pupil._id"
-              class="btn-base button1"
-              :key="pupil.id"
-            >
-              <i class="far fa-edit"></i>
-              Edit
-            </router-link>
+            <!--<router-link-->
+              <!--tag="div"-->
+              <!--:to="'/pupil/edit/' + pupil._id"-->
+              <!--class="btn-base button1"-->
+              <!--:key="pupil.id"-->
+            <!--&gt;-->
+              <!--<i class="far fa-edit"></i>-->
+              <!--Edit-->
+            <!--</router-link>-->
             <router-link
               tag="div"
               :to="'/pupil/' + pupil._id"
-              class="btn-base button2"
+              class="btn-base button2 btn-view"
               :key="pupil.id"
             >
               <i class="fas fa-user"></i>
               View
             </router-link>
-            <!--</div>-->
-
-            <!--<div class="btn-base button1"><i class="far fa-edit"></i>Edit</div>-->
-            <!--<div class="btn-base button2"><i class="fas fa-graduation-cap"></i>View</div>-->
           </div>
         </div>
       </div>
-      <div class="tab-layout-small">
-        <h4>List of registered users on the site</h4>
-        <!--<div class="row">-->
-          <!--<router-link-->
-
-            <!--class="btn-base button2"-->
-            <!--tag="div"-->
-            <!--to="/pupil/applicants"-->
-          <!--&gt;-->
-            <!--<i class="fas fa-user fa-3x"></i>-->
-            <!--<p>applicants</p>-->
-          <!--</router-link>-->
-          <!--<router-link-->
-
-            <!--class="btn-base button2"-->
-            <!--tag="div"-->
-            <!--to="/register"-->
-          <!--&gt;-->
-            <!--<i class="fas fa-plus fa-3x"></i>-->
-            <!--<p>add new pupil</p>-->
-          <!--</router-link>-->
-
-        <!--</div>-->
-      </div>
-
     </div>
-  </div>
+
 
 </template>
 

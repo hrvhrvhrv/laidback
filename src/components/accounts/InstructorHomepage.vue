@@ -55,6 +55,9 @@
 
       <!--right hand side of the page showing buttons for creation and view all-->
       <div class="tab-layout-small">
+        <newPupils></newPupils>
+        <allPupils></allPupils>
+
         <h2>Pupils</h2>
         <div class="flex-row justify-space-around">
           <router-link
@@ -101,6 +104,94 @@
 </template>
 
 <script>
+  import axios from 'axios';
+  import allPupils from '../accounts/ViewAllPupils.vue';
+  import newPupils from '../accounts/ApplicantPupils.vue';
+
+
+  export default {
+    components:{
+      // editTheForm: editForm,
+      // addNewLesson:newLesson
+      allPupils,
+      newPupils
+    },
+    data() {
+      return {
+        // showEdit:false,
+        // showNewLesson:false,
+        // pupilID: this.$route.params.id,
+        // Pupil: [],
+        // errors: []
+      }
+    },
+    methods: {
+      // deletePupil() {
+      //   const url = '/pupil/' + this.pupilID;
+      //   axios.delete(url)
+      //     .then(
+      //       this.$router.push('/')
+      //     )
+      //     .catch(error => console.log(error))
+      // },
+      // registerPupil() {
+      //   const url = '/pupil/registered/' + this.pupilID;
+      //   axios.put(url)
+      //     .then(
+      //       this.$router.push('/pupil/all')
+      //     )
+      //     .catch(error => console.log(error))
+      // }
+
+    },
+    computed: {
+      // previousLessons() {
+      //   return this.Pupil.registration.previousLessons
+      // },
+      // theoryTest() {
+      //   return this.Pupil.registration.theoryTest
+      // },
+      // provisional() {
+      //   return this.Pupil.registration.provisional
+      // },
+      // availablilty() {
+      //   return this.Pupil.availability
+      // },
+      // role() {
+      //   return this.Pupil.role
+      // },
+      // pupilName() {
+      //   return this.Pupil.firstName + " " + this.Pupil.lastName
+      // },
+      // lessons() {
+      //   return this.Pupil.lessons
+      // },
+      // location() {
+      //   return this.Pupil.location
+      // },
+      //
+      // numberOfLessons(){
+      //   return this.Pupil.lessons.length
+      // },
+      // blockBookings() {
+      //
+      //   return 10 - this.numberOfLessons
+      // }
+    }
+    ,
+    // created lifecycle hook is a built in methodology of Vue JS, triggered when page is created
+    created() {
+    //   const url = '/pupil/' + this.pupilID;
+    //   axios.get(url)
+    //     .then(res => {
+    //
+    //       console.log("This is the res");
+    //       console.log(res);
+    //       this.Pupil = res.data
+    //     })
+    //     .catch(error => console.log(error))
+    },
+  }
 
   // On load we need to load all lessons with todays date and tomorrow date
   // make it a computed property within the store

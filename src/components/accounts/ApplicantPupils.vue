@@ -1,13 +1,11 @@
 <template>
 
 
-  <div class="page-wrapper col-md-8 offset-md-2">
-    <div class="blog-headline">
-      <h1>New Pupil Applications</h1>
-      <hr>
-    </div>
+
     <div class="tab-layout-container">
+
       <div class="tab-layout-large">
+        <h2>Applicant Pupils</h2>
         <div v-if="Pupils.length === 0">
           <h2>There are no current applicants</h2>
         </div>
@@ -33,14 +31,10 @@
           </div>
         </div>
       </div>
-      <div class="tab-layout-small">
-        <h4>A list of all new pupil applications<br><br> Click on the list item to view full details</h4>
 
-
-      </div>
 
     </div>
-  </div>
+
 
 </template>
 
@@ -75,8 +69,6 @@
 </script>
 
 <style scoped>
-  .btn-view {
-    width: 100%;
-  }
+
 
 </style>
