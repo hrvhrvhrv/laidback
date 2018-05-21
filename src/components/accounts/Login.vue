@@ -1,12 +1,7 @@
 <template>
 
 
-  <div class="page-wrapper col-md-8 offset-md-2">
-    <div class="blog-headline">
-      <h1>Login
-        <hr>
-      </h1>
-    </div>
+
     <div class="tab-layout-container">
       <div class="tab-layout-large">
         <form class=" " @submit.prevent="">
@@ -53,7 +48,7 @@
 
     </div>
 
-  </div>
+
 </template>
 
 <script>

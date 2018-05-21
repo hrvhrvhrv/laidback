@@ -129,7 +129,11 @@ ul {
 
 a {
   text-decoration: none;
-  color: #4B4E49;;
+  color: #f0f0f0;
+}
+
+a:hover {
+  color: #D0021B;
 }
 
 html {
@@ -272,9 +276,10 @@ main navigation bar
 */
 
 .title{
-  color:#C1A886;
+  color:#4a4a4a;
   padding: 0.5rem 0;
   font-size: 150%;
+  font-weight: bold;
 }
 
 .splash_title{
@@ -311,9 +316,10 @@ main navigation bar
 
 .main_header_txt{
   font-size: 2rem;
-  padding: 25px 30px;
-  background: #FFC76C;
-  height: 100%;
+  padding: 15px 30px;
+  background: #343a40;
+  height: 10vh;
+  box-sizing: border-box;
 }
 
 
@@ -321,8 +327,8 @@ main navigation bar
 .splash_header{
   margin-top: 10vh;
   width: 60%;
-  height: 15vh;
-  background: RGBA(114, 114, 114, 0.80);
+  height: 20vh;
+  background: #fff;
   font-size: 125%;
   padding: 15px 30px ;
   /* text-align: center; */
@@ -375,21 +381,22 @@ main navigation bar
 
 .pageSection_60 {
   width: 60%;
-  height: 100vh;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   object-fit: cover;
   box-sizing: border-box;
+  background: #BDBDBD;
 }
 
 .pageSection_60 img {
-  height: 100vh;
+  height: 70vh;
   z-index: 5;
 }
 
 .pageSection_40 {
-  margin-top: 10vh;
+  /*margin-top: 10vh;*/
   width: 40%;
   display: flex;
   flex-direction: column;
@@ -401,11 +408,11 @@ main navigation bar
   /* margin-top: 10vh; */
   font-size: 275%;
   padding: 25px 15px;
-  width: 55%;
-  height: 20vh;
+  width: 100%;
+  height: 10vh;
   overflow: hidden;
   box-sizing: border-box;
-  background: #FF8071;
+  background: #d0021b;
   /* margin-left: -25%; */
   text-align: center;
   display: flex;
@@ -417,11 +424,11 @@ main navigation bar
 
 .images40_mainText_container{
   padding: 15px 30px;
-  height: 60vh;
+  height: 50vh;
   overflow: auto;
   box-sizing: border-box;
-  background: RGBA(114, 114, 114, 0.80);
-  margin-left: 10% ;
+  background: RGBA(114, 114, 114, 0.05);
+  /*margin-left: 10% ;*/
 }
 
 
@@ -447,20 +454,20 @@ main navigation bar
 }
 
 .active{
-  font-size: 150%;
-  color: #FF8071;
+  font-size: 125%;
+  color: #FFf;
 }
 
 .active a{
-  color: #FF8071;
+  color: #fff;
 }
 
 .btn_nextSection{
   height: 10vh;
-  background: #FFC76C;
-  color: #4B4E49;
+  background: #d0021b;
+  color: #fff;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
   align-items:  flex-end;
   font-size: 36px;
@@ -471,7 +478,8 @@ main navigation bar
 
 .width30{
   width: 20%;
-  background: RGBA(165, 137, 96, 1.00);
+  /*background: RGBA(165, 137, 96, 1.00);*/
+  background: #d0021b;
   align-items:  center;
   justify-content: center;
   color: white;
@@ -484,4 +492,21 @@ main navigation bar
 
 .width70{
   width: 80%;
+}
+
+
+/*  - - - - - - - */
+
+.availabilityDays {
+  padding: 15px 10px;
+}
+
+.profileImage, .pupil-text {
+  padding-top: 15px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
