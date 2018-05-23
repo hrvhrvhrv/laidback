@@ -15,6 +15,10 @@
         margin: auto;
         width: 100%;
     }
+
+  body, main{
+    overflow: scroll;
+  }
     .splash_header{
         margin-top: 80px;
         height: auto;
@@ -24,7 +28,7 @@
     .pageSection_60,
     .pageSection_20,
     .pageSection_40,
-    .images40_header 
+    .images40_header
      {
         width: 100%;
     }
@@ -55,9 +59,9 @@
         margin-top: 0;
     }
     .pageSection_20 img{
-     
+
         filter: grayscale(0%);
-    }    
+    }
 
 .pageSection_60 img{
     margin-left: -30%;
@@ -94,8 +98,8 @@
         height: 80px;
     }
 
-    
-    /* 
+
+    /*
 shopping cart display and removal animation
 */
     .shoppingCart-wrapper.ng-hide {

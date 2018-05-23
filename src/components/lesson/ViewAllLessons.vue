@@ -1,29 +1,10 @@
 <template>
 
 
-  <div class="page-wrapper col-md-8 offset-md-2">
-    <div class="blog-headline">
-      <h1>All booked lessons</h1>
-    </div>
 
-    <div class="tab-layout-container">
-      <div class="tab-layout-small">
-        <p>Select the date of a lesson</p>
-        <v-date-picker
-
-          :attributes='attributes'
-          is-inline
-
-          :theme-styles='themeStyles'
-
-        >
-          <!---->
-
-          <!--&gt;-->
-        </v-date-picker>
-      </div>
       <div class="tab-layout-large">
-        <div v-for="lessonData in lessons" class="Lesson-list-item flex-row no-wrap">
+        <h2>All Lessons</h2>
+        <div v-for="lessonData in lessons" class="Lesson-list-item flex-row">
           <div class="imageWrapper">
             <div class="profileImage">
               <h3>{{lessonData.lessonSLot}}</h3>
@@ -56,8 +37,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
 </template>
 
 <script>
@@ -178,5 +158,7 @@
 </script>
 
 <style scoped>
-
+.tab-layout-large{
+  width: 100%;
+}
 </style>

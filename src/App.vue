@@ -1,15 +1,9 @@
 <template>
   <div>
-    <!--<div class="pageHeaderImage">-->
-      <!--&lt;!&ndash;<img src="assets/Clydeside1.jpg" alt="">&ndash;&gt;-->
-    <!--</div>-->
     <app-header></app-header>
-    <!--<div class="page-wrapper col-md-8 offset-md-2">-->
     <transition mode="out-in" name="slide-fade">
-
       <router-view> </router-view>
     </transition>
-    <!--</div>-->
   </div>
 </template>
 

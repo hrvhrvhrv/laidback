@@ -1,15 +1,3 @@
-
-h1, h2, h3, h4, h5, h6, button {
-  font-weight: normal;
-  font-family: 'Abel', sans-serif;
-
-
-}
-h1{
-  font-family: 'Fugaz One', cursive;
-  color: #d0021b;
-}
-
 ul {
   list-style-type: none;
   padding: 0;
@@ -20,9 +8,7 @@ li {
   margin: 0 10px;
 }
 
-a {
-  color: #42b983;
-}
+
 .pupil-text {
   text-align: center;
   font-size: 2.75vh;
@@ -55,7 +41,7 @@ h5 {
 }
 
 .Lesson-list-item {
-  width: 100%;
+  /*width: 100%;*/
   border-left: 10px solid #4a4a4a;
   margin-bottom: 15px;
   height: 75px;
@@ -196,18 +182,9 @@ h5 {
 
 }
 
-input[type=text], textarea{
-  box-sizing:border-box;
-  width:100%;
-  font-style:italic;
-  padding-left:30px;
-  font-size: 1.4rem;
-  color: #4a4a4a;
-  margin-bottom:15px;
-  border-bottom: 5px solid #BDBDBD;
-}
 
-input[type=text]:hover, .blog-base:hover, textarea:hover{
+
+input[type=text]:hover,input[type=tel]:hover,  .blog-base:hover, textarea:hover{
   box-shadow: 5px 10px #2AFC98;
   color:#4a4a4a;
   background:#fff;
@@ -275,7 +252,7 @@ input[type=text]:hover, .blog-base:hover, textarea:hover{
 .tab-layout-small,
 .tab-layout-large {
   box-sizing: border-box;
-  background: white;
+  /*background: white;*/
   padding: 0 15px;
   display: flex;
   flex-direction: column;
@@ -287,8 +264,8 @@ input[type=text]:hover, .blog-base:hover, textarea:hover{
 }
 
 .tab-layout-large {
-  width: 60%;
-  min-width: 600px;
+  width: 50%;
+  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: start;

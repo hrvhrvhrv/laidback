@@ -1,143 +1,175 @@
 <template>
 
 
-  <div class="page-wrapper col-md-8 offset-md-2">
-    <div class="blog-headline">
-      <h1 v-if="role === 'Applicant'" >Registration Request</h1>
-      <h1 v-if="role === 'Registered'" >Registered Pupil</h1>
-      <hr>
+  <!--<div class="page-wrapper col-md-8 offset-md-2">-->
+  <!--<div class="tab-layout-container">-->
+
+
+  <!--</div>-->
+  <!--</div>-->
+
+  <div>
+
+    <div class="splash_header">
+
+      <h1 class="title" v-if="role === 'Applicant'">Registration Request</h1>
+      <h1 class="title" v-if="role === 'Registered'">Registered Pupil</h1>
+      <p>Fill in the form below to apply to be a pupil with laidback driving school.</p>
+      <p>We will review your application and respond to you in one day</p>
     </div>
-    <div class="tab-layout-container">
-      <div class="tab-layout-small">
-        <div class='profile-pic'>
-          <img src="../../assets/logo.png" alt="">
-        </div>
-        <div style="padding: 30px 0 0 30px" v-if="!showEdit">
-          <h2>{{Pupil.firstName}} {{Pupil.lastName}}</h2>
-          <p>{{Pupil.location}}</p>
-          <p>{{Pupil.phoneNumber}}</p>
-          <p>{{Pupil.email}}</p>
-          <p>{{role}}</p>
-          <p>Total Number of Lessons <br> {{numberOfLessons}}</p>
-          <p>Remaining Block Booking <br> {{ blockBookings }} / 10</p>
+    <main class="flex-row">
 
-        </div>
-
-        <transition name="fade" mode="in-out">
-
-        <editTheForm
-          v-if="showEdit"
-          v-bind:Pupil="Pupil"
-        ></editTheForm>
-        </transition>
-      </div>
-      <div class="tab-layout-large col ">
-        <button
-          @click="showNewLesson = !showNewLesson"
-          class="btn-base button2"
-        >
-          <i class="fas fa-graduation-cap"></i>
-          New Lesson
-        </button>
-        <transition name="fade" mode="out-in">
-        <addNewLesson
-          v-if="showNewLesson"
-        ></addNewLesson></transition>
-        <div v-if="role === 'Applicant'">
-          <h1>Registration Request</h1>
-          <hr>
+      <div class="pageSection_60">
 
 
-          <div class="row justify-space-between">
-            <h2>Provisional Licence</h2>
-            <div v-if="provisional"><i class="fas fa-check fa-2x"></i></div>
-            <div v-if="!provisional"><i class="fas fa-ban fa-2x"></i></div>
-          </div>
-          <div class="row justify-space-between">
-            <h2>Theory Test</h2>
-            <div v-if="!theoryTest"><i class="fas fa-ban fa-2x"></i></div>
-            <div v-if="theoryTest"><i class="fas fa-check fa-2x"></i></div>
-          </div>
-          <div class="row justify-space-between">
-            <h2>Previous Lessons</h2>
-            <h1>{{previousLessons}}</h1>
-          </div>
-          <div class="col justify-space-between">
-            <h2>Availability</h2>
-            <div class="row">
-              <h1 class="availabilityDays" v-for="days in availablilty">{{days}}</h1>
-            </div>
+
+          <transition name="fade" mode="out-in">
+            <addNewLesson
+              v-if="showNewLesson"
+            ></addNewLesson>
+          </transition>
+          <div v-if="role === 'Applicant'">
+            <h1>Registration Request</h1>
             <hr>
-          </div>
 
-          <div class="flex-row">
-            <div class="btn-base btn-submit"
-                 @click="registerPupil">
-              Accept as Pupil
+
+            <div class="row justify-space-between">
+              <h2>Provisional Licence</h2>
+              <div v-if="provisional"><i class="fas fa-check fa-2x"></i></div>
+              <div v-if="!provisional"><i class="fas fa-ban fa-2x"></i></div>
+            </div>
+            <div class="row justify-space-between">
+              <h2>Theory Test</h2>
+              <div v-if="!theoryTest"><i class="fas fa-ban fa-2x"></i></div>
+              <div v-if="theoryTest"><i class="fas fa-check fa-2x"></i></div>
+            </div>
+            <div class="row justify-space-between">
+              <h2>Previous Lessons</h2>
+              <h1>{{previousLessons}}</h1>
+            </div>
+            <div class="col justify-space-between">
+              <h2>Availability</h2>
+              <div class="row">
+                <h1 class="availabilityDays" v-for="days in availablilty">{{days}}</h1>
+              </div>
+              <hr>
             </div>
 
-            <div class="btn-base btn-clear"
-                 @click="deletePupil">
-              Reject as pupil
-            </div>
-          </div>
+            <div class="flex-row">
+              <div class="btn-base btn-submit"
+                   @click="registerPupil">
+                Accept as Pupil
+              </div>
 
-        </div>
-        <div v-if="role === 'Registered'">
-          <h2>Next lesson</h2>
-          <div v-for="lessonData in lessons" class="Lesson-list-item flex-row no-wrap">
-            <div class="imageWrapper">
-              <div class="profileImage">
-                <h3>{{lessonData.lessonSLot}}</h3>
-                <p>{{lessonData.lessonDate | moment(" Do MMMM YYYY")}}</p>
+              <div class="btn-base btn-clear"
+                   @click="deletePupil">
+                Reject as pupil
               </div>
             </div>
-            <div class="text-container flex-column">
-              <h5 class="pupil-text ">{{Pupil.firstName}}</h5>
-              <p>{{Pupil.location}}</p>
-            </div>
-            <div class="flex-row button-container">
-              <router-link
-                tag="div"
-                :to="'/lesson/edit/' + lessonData._id"
-                class="btn-base button1"
-              >
-                <i class="fas fa-graduation-cap"></i>
-                edit
-              </router-link>
 
-              <router-link
-                tag="div"
-                :to="'/lesson/' + lessonData._id"
-                class="btn-base button2"
-              >
-                <i class="fas fa-graduation-cap"></i>
-                View
-              </router-link>
-              <!--<div class="btn-base button1"><i class="far fa-edit"></i>Edit</div>-->
-            </div>
           </div>
-          <h2>Previous lesson</h2>
+          <div v-if="role === 'Registered'">
+            <h2>Next lesson</h2>
+            <div v-for="lessonData in lessons" class="Lesson-list-item flex-row ">
+              <div class="imageWrapper">
+                <div class="profileImage">
+                  <h3>{{lessonData.lessonSLot}}</h3>
+                  <p>{{lessonData.lessonDate | moment(" Do MMMM YYYY")}}</p>
+                </div>
+              </div>
+              <div class="text-container flex-column">
+                <h5 class="pupil-text ">{{Pupil.firstName}}</h5>
+                <p>{{Pupil.location}}</p>
+              </div>
+              <div class="flex-row button-container">
+                <router-link
+                  tag="div"
+                  :to="'/lesson/edit/' + lessonData._id"
+                  class="btn-base button1"
+                >
+                  <i class="fas fa-graduation-cap"></i>
+                  edit
+                </router-link>
 
-          <!--<router-link-->
+                <router-link
+                  tag="div"
+                  :to="'/lesson/' + lessonData._id"
+                  class="btn-base button2"
+                >
+                  <i class="fas fa-graduation-cap"></i>
+                  View
+                </router-link>
+                <!--<div class="btn-base button1"><i class="far fa-edit"></i>Edit</div>-->
+              </div>
+            </div>
+            <h2>Previous lesson</h2>
+
+            <!--<router-link-->
             <!--tag="div"-->
             <!--:to="'/lesson/new/'+ Pupil._id"-->
             <!--class="btn-base button2"-->
-          <!--&gt;-->
+            <!--&gt;-->
             <!--<i class="fas fa-graduation-cap"></i>-->
             <!--New Lesson-->
-          <!--</router-link>-->
-          <button
-            @click="showEdit = !showEdit"
-            class="btn-base button1"
-          >
-            <i class="fas fa-graduation-cap"></i>
-            Edit Profile
-          </button>
-        </div>
+            <!--</router-link>-->
+
+          </div>
+
 
       </div>
-    </div>
+      <div class="pageSection_40">
+        <header class="images40_header">
+          <h3 class="title_large">About Laidback</h3>
+        </header>
+        <div class="images40_mainText_container">
+
+
+            <!--<div class='profile-pic'>-->
+              <!--<img src="../../assets/logo.png" alt="">-->
+            <!--</div>-->
+
+            <div style="padding: 30px 0 0 30px" v-if="!showEdit">
+              <h2>{{Pupil.firstName}} {{Pupil.lastName}}</h2>
+              <p>{{Pupil.location}}</p>
+              <p>{{Pupil.phoneNumber}}</p>
+              <p>{{Pupil.email}}</p>
+              <p>{{role}}</p>
+              <p>Total Number of Lessons <br> {{numberOfLessons}}</p>
+              <p>Remaining Block Booking <br> {{ blockBookings }} / 10</p>
+
+            </div>
+
+            <transition name="fade" mode="in-out">
+
+              <editTheForm
+                v-if="showEdit"
+                v-bind:Pupil="Pupil"
+              ></editTheForm>
+            </transition>
+
+
+        </div>
+        <footer class="fullWidth flex-row">
+
+
+          <div
+            @click="showEdit = !showEdit"
+            class="btn_nextSection width30 backBtn"
+
+          >
+            <h2>Edit Profile</h2>
+          </div>
+
+          <div
+            class="btn_nextSection width70" @click="showNewLesson = !showNewLesson"
+
+          >
+            <h2>New Lesson</h2>
+          </div>
+        </footer>
+      </div>
+
+    </main>
   </div>
 
 </template>
@@ -148,14 +180,14 @@
   import newLesson from '../lesson/NewLesson.vue';
 
   export default {
-    components:{
+    components: {
       editTheForm: editForm,
-      addNewLesson:newLesson
+      addNewLesson: newLesson
     },
     data() {
       return {
-        showEdit:false,
-        showNewLesson:false,
+        showEdit: false,
+        showNewLesson: false,
         pupilID: this.$route.params.id,
         Pupil: [],
         errors: []
@@ -206,7 +238,7 @@
         return this.Pupil.location
       },
 
-      numberOfLessons(){
+      numberOfLessons() {
         return this.Pupil.lessons.length
       },
       blockBookings() {
@@ -238,10 +270,17 @@
   .profileImage, .pupil-text {
     padding-top: 15px;
   }
+
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+  {
     opacity: 0;
+  }
+  .pageSection_60{
+    background: #fff;
+    padding: 15px;
   }
 </style>

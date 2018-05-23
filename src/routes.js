@@ -1,13 +1,16 @@
 import Home from './components/Layout/Home.vue';
 import Blank from './components/Layout/BlankComponent.vue';
+import About from './components/info-pages/About.vue';
+import Contact from './components/info-pages/Contact.vue';
+import Prices from './components/info-pages/Prices.vue'
 import VueRouter from 'vue-router'
 
 import store from './store/store.js'
 
 // blog component imports
-import blog from "./components/blog/blog.vue";
+
 import blogList from './components/blog/ListOfBlogPosts.vue'
-import BlogPost from './components/blog/blogPost.vue';
+
 import NewBlogPost from './components/blog/createBlog.vue';
 import blogPostEdit from './components/blog/editBlog.vue';
 
@@ -36,25 +39,14 @@ export const routes = [
   {path: '/', component: Home},
 
   // Main site routes
-  {path: '/getting-started', component: Blank},
-  {path: '/price', component: Blank},
-  {path: '/about-us', component: Blank},
-  {path: '/contact', component: Blank},
+
+  {path: '/price', component: Prices},
+  {path: '/about-us', component: About},
+  {path: '/contact', component: Contact},
 
 
   // Blog routes set with nested routing as children components / paths
-  {
-    path: '/blog', component: blog, children: [
-      // the default for this route is to show the list of blog posts
-      {path: '', component: blogList},
-      // post/:id shows single specific blog post based on its id parameter passed in URL
-      {path: 'post/:id', component: BlogPost},
-      // /exit/id
-      {path: 'post/edit/:id', component: blogPostEdit},
-      {path: 'new', component: NewBlogPost}
-    ]
-  },
-
+  {path: '/blog', component: blogList},
 
   //  Lesson routes
   {path: '/lesson/new/:id', component: NewLesson},
@@ -72,7 +64,7 @@ export const routes = [
   //  Accounts
   {path: '/register', component: Register},
   {path: '/login', component: Login},
-  {path: '/instructorHomepage', component: InsturctorHomePage, meta: {adminOnly: true, loggedInOnly: false}},
+  {path: '/instructorHomepage', component: InsturctorHomePage, meta: {adminOnly: true}},
   {path: '/pupilHomepage', component: Blank},
 
 

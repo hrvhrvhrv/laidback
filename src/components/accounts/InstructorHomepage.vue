@@ -1,105 +1,94 @@
 <template>
 
+  <div>
 
-  <div class="page-wrapper col-md-8 offset-md-2">
-    <div class="blog-headline">
-      <h1>Monday 10th June</h1>
-      <hr>
+    <div class="splash_header">
+      <h1 class="title">Instructor Home page</h1>
+      <p>Home of Glasgows most laidback driving school</p>
     </div>
-    <div class="tab-layout-container">
-      <div class="tab-layout-large">
-        <h2>Todays lessons</h2>
-        <ul>
-          <!-- List item showing each lesson data per page-->
-          <div v-for="item in 3" class="Lesson-list-item flex-row no-wrap">
-            <div class="imageWrapper">
-              <div class="profileImage">
-                <h1>12:45</h1>
-              </div>
+    <main class="flex-row">
+<!--the display tab-->
+      <div class="pageSection_60">
+
+        <div class="">
+          <newPupils v-if="showNewPupils"></newPupils>
+          <allPupils v-if="showAllPupils"></allPupils>
+          <allLessons v-if="showAllLessons"></allLessons>
+        </div>
+      </div>
+      <!-- the buttons -->
+      <div class="pageSection_40">
+        <header class="images40_header">
+          <h3 class="title_large">Controls</h3>
+        </header>
+        <div class="images40_mainText_container">
+          <h2>Pupils</h2>
+          <div class="flex-row justify-space-around">
+            <div
+              class="btn-base button3"
+              @click="setViewNewPupil">
+              <i class="fas fa-user fa-3x"></i>
+              <h3>
+                New Pupils</h3>
             </div>
-            <div class="text-container flex-column">
-              <h5 class="pupil-text ">Pupil Name</h5>
-              <h3>12 Dorchester Avenue</h3>
+            <div
+              class="btn-base button3"
+              @click="setViewAllPupil">
+              <i class="fas fa-user fa-3x"></i>
+              <h3>
+                All Pupils</h3>
             </div>
-            <div class="flex-row button-container">
-              <div class="btn-base button1"><i class="far fa-edit"></i>Edit</div>
-              <div class="btn-base button2"><i class="fas fa-graduation-cap"></i>View</div>
-            </div>
+
+
+
+
+
           </div>
-        </ul>
-        <h2>Lessons</h2>
-        <div class="flex-row justify-space-around">
+          <h2>Lessons</h2>
+          <div class="flex-row justify-space-around">
+            <div
+              class="btn-base button3"
+              @click="setViewAllLessons">
+              <i class="fas fa-user fa-3x"></i>
+              <h3>
+                All Lessons</h3>
+            </div>
           <router-link
-            class="btn-base button3"
-            tag="div"
-            to="/allLessons">
-            <i class="fas fa-graduation-cap fa-3x"></i>
-            <h3>View all</h3>
+          class="btn-base button3"
+          tag="div"
+          to="/allLessons">
+          <i class="fas fa-graduation-cap fa-3x"></i>
+          <h3>View week</h3>
           </router-link>
           <router-link
-            class="btn-base button3"
-            tag="div"
-            to="/allLessons">
-            <i class="fas fa-graduation-cap fa-3x"></i>
-            <h3>View week</h3>
+          class="btn-base button3"
+          tag="div"
+          to="/allLessons">
+          <i class="fas fa-graduation-cap fa-3x"></i>
+          <h3>View month</h3>
           </router-link>
-          <router-link
-            class="btn-base button3"
-            tag="div"
-            to="/allLessons">
-            <i class="fas fa-graduation-cap fa-3x"></i>
-            <h3>View month</h3>
-          </router-link>
+          </div>
         </div>
+        <footer class="fullWidth flex-row">
+          <router-link
+            tag="div"
+            class="btn_nextSection width30 backBtn"
+            to="/register"
+          >
+            <h2>back</h2>
+          </router-link>
+          <router-link
+            tag="div"
+            class="btn_nextSection width70"
+            to="/register"
+          >
+            <h2>Register</h2>
+          </router-link>
+        </footer>
+
       </div>
 
-      <!--right hand side of the page showing buttons for creation and view all-->
-      <div class="tab-layout-small">
-        <newPupils></newPupils>
-        <allPupils></allPupils>
-
-        <h2>Pupils</h2>
-        <div class="flex-row justify-space-around">
-          <router-link
-            class="btn-base button3"
-            tag="div"
-            to="/pupil/applicants">
-            <i class="fas fa-user fa-3x"></i>
-            <h3>
-              New Pupils</h3>
-          </router-link>
-          <router-link
-            class="btn-base button3"
-            tag="div"
-            to="/pupil/all">
-            <i class="fas fa-user fa-3x"></i>
-            <h3>View Pupils</h3>
-          </router-link>
-
-
-        </div>
-
-        <h2>Blog</h2>
-        <div class="flex-row justify-space-around">
-          <router-link
-            class="btn-base button3"
-            tag="div"
-            to="/blog/new">
-            <i class="far fa-newspaper fa-3x"></i>
-            <h3>New Blog</h3>
-          </router-link>
-
-          <router-link
-            class="btn-base button3"
-            tag="div"
-            to="/blog">
-            <i class="far fa-newspaper fa-3x"></i>
-            <h3>View Blog</h3>
-          </router-link>
-
-        </div>
-      </div>
-    </div>
+    </main>
   </div>
 </template>
 
@@ -107,17 +96,22 @@
   import axios from 'axios';
   import allPupils from '../accounts/ViewAllPupils.vue';
   import newPupils from '../accounts/ApplicantPupils.vue';
+  import allLessons from '../lesson/ViewAllLessons'
 
 
   export default {
-    components:{
+    components: {
       // editTheForm: editForm,
       // addNewLesson:newLesson
       allPupils,
-      newPupils
+      newPupils,
+      allLessons
     },
     data() {
       return {
+        showNewPupils: false,
+        showAllPupils: false,
+        showAllLessons: false
         // showEdit:false,
         // showNewLesson:false,
         // pupilID: this.$route.params.id,
@@ -126,6 +120,22 @@
       }
     },
     methods: {
+
+      setViewAllPupil(){
+        this.showNewPupils = false;
+          this.showAllPupils = true;
+        this.showAllLessons= false
+      },
+      setViewNewPupil(){
+        this.showNewPupils = true;
+        this.showAllPupils = false;
+        this.showAllLessons= false
+      },
+      setViewAllLessons(){
+        this.showNewPupils = false;
+        this.showAllPupils = false;
+        this.showAllLessons= true
+      }
       // deletePupil() {
       //   const url = '/pupil/' + this.pupilID;
       //   axios.delete(url)
@@ -181,15 +191,15 @@
     ,
     // created lifecycle hook is a built in methodology of Vue JS, triggered when page is created
     created() {
-    //   const url = '/pupil/' + this.pupilID;
-    //   axios.get(url)
-    //     .then(res => {
-    //
-    //       console.log("This is the res");
-    //       console.log(res);
-    //       this.Pupil = res.data
-    //     })
-    //     .catch(error => console.log(error))
+      //   const url = '/pupil/' + this.pupilID;
+      //   axios.get(url)
+      //     .then(res => {
+      //
+      //       console.log("This is the res");
+      //       console.log(res);
+      //       this.Pupil = res.data
+      //     })
+      //     .catch(error => console.log(error))
     },
   }
 
@@ -200,6 +210,10 @@
 </script>
 
 <style scoped>
-
+.pageSection_60{
+  padding: 15px 10px;
+  background: #fff;
+  overflow: scroll;
+}
 
 </style>

@@ -2,7 +2,7 @@
 
 
 
-    <div class="tab-layout-container">
+
 
       <div class="tab-layout-large">
         <h2>Applicant Pupils</h2>
@@ -12,7 +12,7 @@
         <div v-for="pupil of Pupils" class="Lesson-list-item flex-row">
           <div class="imageWrapper">
             <div class="profileImage">
-              <img src="http://www.gravatar.com/avatar/0816f8387182c2bf300d69cb6fc85aab?s=100&r=g&d=mm" alt="">
+              <!--<img src="http://www.gravatar.com/avatar/0816f8387182c2bf300d69cb6fc85aab?s=100&r=g&d=mm" alt="">-->
             </div>
           </div>
           <div class="text-container flex-column">
@@ -33,7 +33,7 @@
       </div>
 
 
-    </div>
+
 
 
 </template>
@@ -69,6 +69,8 @@
 </script>
 
 <style scoped>
-
+.tab-layout-large{
+  width: 100%;
+}
 
 </style>
