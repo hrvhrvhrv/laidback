@@ -11,15 +11,17 @@
 
       <div class="pageSection_60">
 
-
+        <!--<img src="../../assets/heather-emond-577240-unsplash.jpg" alt="">-->
       </div>
       <div class="pageSection_40">
         <header class="images40_header">
           <h3 class="title_large">About Laidback</h3>
         </header>
         <div class="images40_mainText_container">
-
-
+<h2 class="title">Who are we</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi</p>
+          <h2 class="title">Our Philosophy</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi</p>
         </div>
         <footer class="fullWidth flex-row">
           <div

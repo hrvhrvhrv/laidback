@@ -9,14 +9,7 @@
     <main class="flex-row">
 
       <div class="pageSection_60">
-        <!--<div>-->
-        <!--&lt;!&ndash; <img src="images/white_03.jpg" alt="Save the Rhino Logo"> &ndash;&gt;-->
-        <!--<img class="pageImg" ng-src="images/{{rhino[thisRhino].imgNam}}_{{thisImage}}.jpg" alt="Description" />-->
-        <!--<a href="index.html"></a>-->
-        <!--<h2 class="page_title">{{rhino[thisRhino].type}}</h3>-->
-        <!--</a>-->
-        <!--</div>-->
-        <h1>This is the section 60</h1>
+        <img src="../../assets/Clydeside1.jpg" alt="">
       </div>
       <div class="pageSection_40">
         <header class="images40_header">

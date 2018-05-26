@@ -10,7 +10,7 @@
     <main class="flex-row">
 
       <div class="pageSection_60">
-
+        <img src="../../assets/stoater-411258-unsplash.jpg" alt="">
 
       </div>
       <div class="pageSection_40">

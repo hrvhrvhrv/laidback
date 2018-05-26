@@ -178,8 +178,8 @@ li {
 }
 .slide-fade-enter, .slide-fade-leave-to
   /* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateY(10vh) ;
-
+  transform: translateY(100vh) rotate(-10deg) ;
+transform-origin:  100% 30vh;
 }
 
 .top-pad{
@@ -689,8 +689,8 @@ font-size: 1.5rem;
 
 
 .title_large {
-  letter-spacing: 5px;
-  font-family: 'Space Mono', monospace;
+
+  /*font-family: 'Space Mono', monospace;*/
   color: #fff;
 }
 

@@ -37,8 +37,8 @@ Vue.use(VCalendar, {
 // Vue.http.options.root = 'https://vuejs-stock-trader-c7441.firebaseio.com/';
 // Vue.http.options.root = 'http://localhost:3005/v1/';
 
-// axios.defaults.baseURL = 'http://localhost:3005/v1';
-axios.defaults.baseURL = 'https://shrouded-reaches-73606.herokuapp.com/v1';
+axios.defaults.baseURL = 'http://localhost:3005/v1';
+// axios.defaults.baseURL = 'https://shrouded-reaches-73606.herokuapp.com/v1';
 
 
 Vue.filter('currency', (value) => {

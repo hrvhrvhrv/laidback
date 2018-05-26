@@ -11,7 +11,7 @@
 
       <div class="pageSection_60">
 
-
+        <!--<img src="../../assets/agriculture-animal-animal-photography-420233.jpg" alt="">-->
       </div>
       <div class="pageSection_40">
         <header class="images40_header">
