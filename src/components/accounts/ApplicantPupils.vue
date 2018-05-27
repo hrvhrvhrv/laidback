@@ -5,7 +5,9 @@
 
 
       <div class="tab-layout-large">
-        <h2>Applicant Pupils</h2>
+        <h2 class="title">Applicant Pupils</h2>
+        <p>There are currently {{Pupils.length}} awaiting review</p>
+        <hr>
         <div v-if="Pupils.length === 0">
           <h2>There are no current applicants</h2>
         </div>

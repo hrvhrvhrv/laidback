@@ -16,7 +16,9 @@ import { routes } from "./routes";
 
 import "./re-style-sheet.css";
 import "./responsive.css";
+import Vue2Filters from 'vue2-filters'
 
+Vue.use(Vue2Filters)
 
 
 Vue.use(VueRouter);

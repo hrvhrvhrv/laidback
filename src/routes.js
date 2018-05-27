@@ -28,6 +28,7 @@ import RegisteredProfile from './components/accounts/RegisteredProfile.vue';
 import PupilProfile from './components/accounts/PupilProfile.vue';
 import PupilProfileEdit from './components/accounts/PupilProfileEdit.vue';
 import Login from './components/accounts/Login.vue';
+import NonRegistered from './components/accounts/NonRegisteredPupil.vue';
 
 
 // Instructor components
@@ -65,7 +66,7 @@ export const routes = [
   {path: '/register', component: Register},
   {path: '/login', component: Login},
   {path: '/instructorHomepage', component: InsturctorHomePage, meta: {adminOnly: true}},
-  {path: '/pupilHomepage', component: Blank},
+  {path: '/NotRegistered', component: NonRegistered},
 
 
   // {path: '/pupil/all', component: AllPupils, meta: {adminOnly: true, loggedInOnly: false}},

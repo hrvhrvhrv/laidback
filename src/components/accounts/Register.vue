@@ -50,7 +50,7 @@
               <!--phoneNumber input container  -->
 
               <div class="form-group" :class="{invalid: $v.phoneNumber.$error}">
-                <label for="input-register-phone-number" class=" col-form-label">Phone Number</label>
+                <label for="input-register-phone-number" class=" col-form-label">Contact Phone Number</label>
 
                 <input type="tel"
                        id="input-register-phone-number"
@@ -65,7 +65,7 @@
 
               </div>
               <div class="form-group">
-                <label class=" col-form-label">Address</label>
+                <label class=" col-form-label">Home Address</label>
 
                   <input type="text" v-model="location" class="form-control"
                          placeholder="Enter your address">
@@ -294,10 +294,6 @@
         axios.post('/account/register', formData)
           .then(res => {
             if (res.data.message) {
-              // alert(res.data.message)
-              //
-              // this.snackbar = true;
-              // this.text = res.data.message;
               this.errors = res.data.message;
             }
             console.log(res);

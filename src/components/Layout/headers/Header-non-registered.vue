@@ -6,7 +6,11 @@
     <!-- <h1 class="main_header_txt width70">Save the Rhino</h1> -->
 
     <nav class="navbar fixed-top navbar-expand ">
-      <div class="btn_nextSection width30 column" >
+
+      <div class="flex-row main_header_txt width70">
+        <!--Router link used to tell Vue JS to route to new page-->
+
+        <!-- brand logo link page top[ left-->
         <router-link
           tag="div"
           class="navbar-brand pull-left"
@@ -24,12 +28,6 @@
         ><img class="logoIMg" src="../../../assets/L-Plate.png" alt="logo">
           aidBack
         </router-link>
-      </div>
-      <div class="flex-row main_header_txt width70">
-        <!--Router link used to tell Vue JS to route to new page-->
-
-        <!-- brand logo link page top[ left-->
-
 
 
         <!--<div class="collapse navbar-collapse " :class="{ show: isNavBarOpen}">-->
@@ -74,40 +72,76 @@
               Blog
             </router-link>
           </li>
-
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              tag="a"
+              to="/register"
+              v-if="!auth"
+            >
+              Register
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              v-if="whatRole === 'Admin'"
+              class="nav-link"
+              tag="a"
+              to="/instructorHomepage"
+            >
+              Admin Page
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              v-if="whatRole === 'Registered'"
+              class="btn-base btn-cancel"
+              tag="a"
+              :to="'/pupil/'+ storeUserID"
+            >
+              My Profile
+            </router-link>
+          </li>
         </ul>
         <!--</div>-->
+      </div>
+      <div class="btn_nextSection width30 column" @click="showLoginForm" v-if="!isLoginBoxShown && !auth" >
+        <h1>Login</h1>
+      </div>
+      <div class="btn_nextSection width30 column" @click="onLogout" v-if="auth">
+        <h1>Logout</h1>
+      </div>
+      <div class="btn_nextSection width30 column" v-if="isLoginBoxShown && !auth">
+        <loginComponent v-if="!auth"></loginComponent>
       </div>
 
     </nav>
 
-      <div class="top-navBar">
-        <h1 class="title">Login</h1>
-        <loginComponent v-if="!auth"></loginComponent>
+    <!--<div class="top-navBar">-->
+    <!--<h1 class="title">Login</h1>-->
+    <!--<loginComponent v-if="!auth"></loginComponent>-->
 
 
-
-        <button class="btn-base btn-submit" @click="onLogout" v-if="auth">Logout</button>
-
+    <!--<button class="btn-base btn-submit" @click="onLogout" v-if="auth">Logout</button>-->
 
 
-        <router-link
-          v-if="whatRole === 'Admin'"
-          class="btn-base btn-cancel"
-          tag="button"
-          to="/instructorHomepage"
-        >
-          Admin Page
-        </router-link>
-        <router-link
-          v-if="whatRole === 'Registered'"
-          class="btn-base btn-cancel"
-          tag="button"
-          :to="'/pupil/'+ storeUserID"
-        >
-          My Profile
-        </router-link>
-      </div>
+    <!--<router-link-->
+    <!--v-if="whatRole === 'Admin'"-->
+    <!--class="btn-base btn-cancel"-->
+    <!--tag="button"-->
+    <!--to="/instructorHomepage"-->
+    <!--&gt;-->
+    <!--Admin Page-->
+    <!--</router-link>-->
+    <!--<router-link-->
+    <!--v-if="whatRole === 'Registered'"-->
+    <!--class="btn-base btn-cancel"-->
+    <!--tag="button"-->
+    <!--:to="'/pupil/'+ storeUserID"-->
+    <!--&gt;-->
+    <!--My Profile-->
+    <!--</router-link>-->
+    <!--</div>-->
 
 
   </header>
@@ -126,7 +160,7 @@
     data() {
       return {
         isNavBarOpen: false,
-        isDropDownOpen: false
+        isLoginBoxShown: false
 
       }
     },
@@ -144,6 +178,9 @@
     },
 
     methods: {
+      showLoginForm(){
+        this.isLoginBoxShown = !this.isLoginBoxShown
+      },
       onLogout() {
         this.$store.dispatch('logout');
         this.$router.push('/');
@@ -172,7 +209,9 @@
   .width70 {
     overflow: hidden;
   }
+.width30{
 
+}
   .navbar {
     padding: 0;
   }

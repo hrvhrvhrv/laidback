@@ -178,7 +178,7 @@ li {
 }
 .slide-fade-enter, .slide-fade-leave-to
   /* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateY(100vh) rotate(-10deg) ;
+  transform: translateY(10vh)  ;
 transform-origin:  100% 30vh;
 }
 
@@ -208,6 +208,7 @@ main{
   height: 75px;
   justify-content: space-between ;
   /*   border: 1px black solid; */
+  background: #fff;
   box-sizing: border-box;
   box-shadow: 1px 1px 2px #4a4a4a;
 }
@@ -218,7 +219,10 @@ main{
   border-color:#2DE1FC ;
 }
 .Lesson-list-item:hover .pupil-text{
-  color: #4a4a4a;
+
+  text-align: center;
+  font-size: 2.75vh;
+  color: #d0021b;
 }
 .Lesson-list-item:hover .profileImage{
   filter: invert(10%)
@@ -310,8 +314,8 @@ main{
 
 
 .text-container {
-  justify-content: center;
-  text-align: center;
+  /*justify-content: center;*/
+  /*text-align: center;*/
   min-width: 200px;
 }
 
@@ -543,6 +547,7 @@ main navigation bar
   color:#4a4a4a;
   padding: 0.5rem 0;
   font-weight: bold;
+  font-size: 1.8rem;
 }
 
 .splash_title:hover{
@@ -585,7 +590,7 @@ main navigation bar
 
 .splash_header{
   margin-top: 10vh;
-  width: 60%;
+  width: 100%;
   height: 20vh;
   background: #fff;
   padding: 15px 30px ;
@@ -733,7 +738,7 @@ font-size: 1.5rem;
 .width30{
   width: 20%;
   /*background: RGBA(165, 137, 96, 1.00);*/
-  background: #343a40;
+
   /*background: #d0021b;*/
   align-items:  center;
   justify-content: center;
@@ -758,6 +763,10 @@ font-size: 1.5rem;
 
 .profileImage, .pupil-text {
   padding-top: 15px;
+  font-size: 2.75vh;
+  color: #d0021b;
+  min-width: 150px;
+
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;

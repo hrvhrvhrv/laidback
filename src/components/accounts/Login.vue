@@ -5,48 +5,39 @@
 
     <form class="loginForm " @submit.prevent="">
 
-      <div class="flex column">
-        <div class="form-group row">
-          <label for="input-register-first-name" class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
+
+        <div class="form-group row" :class="{invalid: $v.email.$error}">
+
             <input type="text" v-model="email" class="form-control" id="input-register-first-name"
-                   placeholder="Enter your email">
-          </div>
+                   placeholder="Enter your email" @blur="$v.email.$touch()"
+            >
         </div>
-        <div class="form-group row">
-          <label for="input-register-last-name" class="col-sm-2 col-form-label">Password</label>
-          <div class="col-sm-10">
+        <div class="form-group row" :class="{invalid: $v.password.$error}">
+
+
             <input type="text" v-model="password" class="form-control" id="input-register-last-name"
-                   placeholder="Enter your password">
-          </div>
+                   placeholder="Enter your password" @blur="$v.password.$touch()"
+            >
+
         </div>
 
-      </div>
 
 
 
+<div v-if="error"><p v-for="msg in errors">{{msg}}</p></div>
 
     </form>
 
     <div class="tab-layout-small">
       <div class=" ">
-        <div class="btn-base btn-submit" @click="submitForm" @keyup.enter="submitForm">
+        <button class="btn-base " @click="submitForm" @keyup.enter="submitForm">
           Login
-        </div>
+        </button>
+        <button class="btn-base " @click="submitForm" @keyup.enter="clear">
+         Cancel
+        </button>
 
-        <!--<div class="btn-base btn-clear" @click="clear">-->
-          <!--Clear form-->
-        <!--</div>-->
       </div>
-
-      <router-link
-
-        class="btn-base  btn-clear"
-        tag="p"
-        to="/register"
-      >
-        Register
-      </router-link>
 
     </div>
 
@@ -56,14 +47,26 @@
 </template>
 
 <script>
+  import {required, email} from 'vuelidate/lib/validators'
+
   export default {
     data() {
       return {
         email: '',
-        password: ''
+        password: '',
+        errors:[]
       }
     },
     computed: {},
+    validations: {
+      email: {
+        required,
+        email
+      },
+      password: {
+        required
+      }
+      },
     methods: {
       submitForm() {
         const formData = {
@@ -75,7 +78,7 @@
 
           if (role === 'Applicant') {
             console.log('Ive changed to applicant');
-            this.$router.push('/notthisOne')
+            this.$router.push('/NotRegistered')
           } else if (role === 'Admin') {
             this.$router.push('/instructorHomepage')
           } else if (role === 'Registered') {
@@ -104,6 +107,9 @@
 
   .loginForm {
     width: 60%;
+  }
+  .form-group{
+    margin: 0;
   }
 
   .tab-layout-small {

@@ -99,6 +99,10 @@
     }
 
 
+    .Lesson-list-item{
+      height: 100%;
+    }
+
     /*
 shopping cart display and removal animation
 */

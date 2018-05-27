@@ -3,18 +3,25 @@
 
 
       <div class="tab-layout-large">
-        <h2>All Lessons</h2>
-        <div v-for="lessonData in lessons" class="Lesson-list-item flex-row">
+        <h2 class="title">All Lessons</h2>
+        <p>There are currently {{lessons.length}} lessons booked</p>
+        <hr>
+        <div v-for="lessonData in orderBy(lessons, 'lessonDate')" class="Lesson-list-item flex-row">
           <div class="imageWrapper">
             <div class="profileImage">
-              <h3>{{lessonData.lessonSLot}}</h3>
-              <p>{{lessonData.lessonDate | moment(" Do MMMM YYYY")}}</p>
+
+              <p>{{lessonData.lessonDate | moment(" Do ")}}</p>
+              <p>{{lessonData.lessonDate | moment(" MMMM ")}}</p>
             </div>
           </div>
-          <!--<div class="text-container flex-column">-->
+          <div class="text-container flex-column">
+
           <!--<h5 class="pupil-text ">{{Pupil.firstName}}</h5>-->
-          <!--<p>{{Pupil.location}}</p>-->
-          <!--</div>-->
+          <p class="title">{{lessonData.pickUpLocation | capitalize}}</p>
+            <h3 style="font-size: 1.5rem">{{lessonData.lessonSLot}}</h3>
+          </div>
+
+
           <div class="flex-row button-container">
             <router-link
               tag="div"
@@ -161,4 +168,7 @@
 .tab-layout-large{
   width: 100%;
 }
+  .profileImage{
+    padding: 10px;
+  }
 </style>

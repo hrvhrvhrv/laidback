@@ -41,7 +41,7 @@
 
       <div class="pageSection_60">
 
-        <h1>{{displayBlog.title}}</h1>
+        <h1 class="title">{{displayBlog.title}}</h1>
         <p>{{displayBlog.text}}</p>
 
       </div>
@@ -68,8 +68,11 @@
             <!--<p style="text-align: right; padding-right: 5px; font-style: italic; margin-bottom: 0px; color: gray">-->
             <!--Published {{Post.created | moment("Do MMMM YYYY")}}</p>-->
             <!--</router-link>-->
+
+
+
             <li
-              v-for="(Post, id) of BlogPosts" class="blog-base "
+              v-for="(Post, id) in orderBy(BlogPosts, 'created') " class="blog-base "
               @click="showThisBlogPost(id)">
               <h2>{{Post.title}}</h2>
               <p style="text-align: right; padding-right: 5px; font-style: italic; margin-bottom: 0px; color: gray">

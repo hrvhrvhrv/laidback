@@ -3,8 +3,9 @@
   <div>
 
     <div class="splash_header">
-      <h1 class="title">Instructor Home page</h1>
-      <p>Home of Glasgows most laidback driving school</p>
+      <h1 class="title">{{todayDate | moment(" Do MMMM YYYY") }}</h1>
+<h1>1 Lesson today</h1>
+
     </div>
     <main class="flex-row">
 <!--the display tab-->
@@ -12,6 +13,7 @@
 
         <div class="">
           <newPupils v-if="showNewPupils"></newPupils>
+
           <allPupils v-if="showAllPupils"></allPupils>
           <allLessons v-if="showAllLessons"></allLessons>
         </div>
@@ -19,10 +21,10 @@
       <!-- the buttons -->
       <div class="pageSection_40">
         <header class="images40_header">
-          <h3 class="title_large">Controls</h3>
+          <h3 class="title_large">Admin Page</h3>
         </header>
         <div class="images40_mainText_container">
-          <h2>Pupils</h2>
+          <h2 class="title">Pupils</h2>
           <div class="flex-row justify-space-around">
             <div
               class="btn-base button3"
@@ -44,45 +46,39 @@
 
 
           </div>
-          <h2>Lessons</h2>
+          <h2 class="title">Lessons</h2>
           <div class="flex-row justify-space-around">
             <div
               class="btn-base button3"
               @click="setViewAllLessons">
-              <i class="fas fa-user fa-3x"></i>
+              <i class="fas fa-graduation-cap fa-3x"></i>
               <h3>
                 All Lessons</h3>
             </div>
-          <router-link
-          class="btn-base button3"
-          tag="div"
-          to="/allLessons">
-          <i class="fas fa-graduation-cap fa-3x"></i>
-          <h3>View week</h3>
-          </router-link>
-          <router-link
-          class="btn-base button3"
-          tag="div"
-          to="/allLessons">
-          <i class="fas fa-graduation-cap fa-3x"></i>
-          <h3>View month</h3>
-          </router-link>
+            <div
+              class="btn-base button3"
+              @click="setViewAllLessons">
+              <i class="fas fa-graduation-cap fa-3x"></i>
+              <h3>
+                This Week Lessons</h3>
+            </div>
+            <div
+              class="btn-base button3"
+              @click="setViewAllLessons">
+              <i class="fas fa-graduation-cap fa-3x"></i>
+              <h3>
+                This Month Lessons</h3>
+            </div>
           </div>
         </div>
         <footer class="fullWidth flex-row">
-          <router-link
-            tag="div"
-            class="btn_nextSection width30 backBtn"
-            to="/register"
-          >
-            <h2>back</h2>
-          </router-link>
+
           <router-link
             tag="div"
             class="btn_nextSection width70"
             to="/register"
           >
-            <h2>Register</h2>
+            <h2>Register new pupil</h2>
           </router-link>
         </footer>
 
@@ -109,9 +105,10 @@
     },
     data() {
       return {
-        showNewPupils: false,
-        showAllPupils: false,
-        showAllLessons: false
+        showNewPupils: true,
+        showAllPupils: true,
+        showAllLessons: false,
+        todayDate: new Date()
         // showEdit:false,
         // showNewLesson:false,
         // pupilID: this.$route.params.id,
@@ -212,7 +209,7 @@
 <style scoped>
 .pageSection_60{
   padding: 15px 10px;
-  background: #fff;
+  /*background: #fff;*/
   overflow: scroll;
 }
 

@@ -1,25 +1,25 @@
 <template>
 
-  <div class="tab-layout-large col-md-8 ">
-    <div class="col-md-11 ">
-      <h4>Update your contact details</h4>
+  <div class="tab-layout-large">
+
+      <h4 class="title">Update your contact details</h4>
       <form class="col-lg-11 " v-on:submit.prevent>
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Email</label>
+          <label class=" col-form-label">Email</label>
           <div class="col-md-11">
-            <input type="text" v-model="Pupil.email" class="" placeholder="Email">
+            <input type="text" v-model="Pupil.email" class="form-control" placeholder="Email">
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Phone Number</label>
+          <label class=" col-form-label">Phone Number</label>
           <div class="col-sm-11">
             <input type="text" v-model="Pupil.phoneNumber" class="form-control"
                    placeholder="Phone number">
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Pick Up Location</label>
+          <label class=" col-form-label">Pick Up Location</label>
           <div class="col-sm-11">
             <input type="text" v-model="Pupil.location" class="form-control"
                    placeholder="Location">
@@ -50,7 +50,7 @@
           </div>
         </div>
       </form>
-    </div>
+
   </div>
 
 </template>

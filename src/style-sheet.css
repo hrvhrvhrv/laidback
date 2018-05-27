@@ -164,11 +164,7 @@ h5 {
 }
 
 
-.text-container {
-  justify-content: center;
-  text-align: center;
-  min-width: 200px;
-}
+
 
 .flex-row {
   display: flex;
